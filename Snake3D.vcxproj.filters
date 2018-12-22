@@ -42,6 +42,12 @@
     <ClCompile Include="Head\MainWindow.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="Head\Scene.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Head\GameObject.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include=".gitignore" />
@@ -49,6 +55,7 @@
     <None Include="shader\naosuit_withoutlight.vs" />
     <None Include="shader\box.fs" />
     <None Include="shader\box.vs" />
+    <None Include="assimp-vc140-mt.dll" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Head\Shader.h">
@@ -84,6 +91,12 @@
     <ClInclude Include="Head\MainWindow.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="Head\Scene.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Head\GameObject.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Library Include="lib\glfw3.lib" />
@@ -96,9 +109,6 @@
       <Filter>资源文件</Filter>
     </Image>
     <Image Include="Resource\image_black.jpg">
-      <Filter>资源文件</Filter>
-    </Image>
-    <Image Include="Resource\image_white.jpg">
       <Filter>资源文件</Filter>
     </Image>
   </ItemGroup>

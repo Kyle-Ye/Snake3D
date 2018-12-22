@@ -124,6 +124,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Head\GameObject.cpp" />
     <ClCompile Include="Head\Camera.cpp" />
     <ClCompile Include="Head\Mesh.cpp" />
     <ClCompile Include="include\glad\glad.c" />
@@ -132,16 +133,19 @@
     <ClCompile Include="include\stb_image.cpp" />
     <ClCompile Include="Head\Snake.cpp" />
     <ClCompile Include="Head\MainWindow.cpp" />
+    <ClCompile Include="Head\Scene.cpp" />
     <ClCompile Include="Source\main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include=".gitignore" />
+    <None Include="assimp-vc140-mt.dll" />
     <None Include="shader\naosuit_withoutlight.fs" />
     <None Include="shader\naosuit_withoutlight.vs" />
     <None Include="shader\box.fs" />
     <None Include="shader\box.vs" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Head\GameObject.h" />
     <ClInclude Include="Head\Camera.h" />
     <ClInclude Include="Head\Mesh.h" />
     <ClInclude Include="Head\Shader.h" />
@@ -153,6 +157,7 @@
     <ClInclude Include="Head\Model.h" />
     <ClInclude Include="Head\Snake.h" />
     <ClInclude Include="Head\MainWindow.h" />
+    <ClInclude Include="Head\Scene.h" />
   </ItemGroup>
   <ItemGroup>
     <Library Include="lib\glfw3.lib" />
@@ -161,7 +166,6 @@
     <Image Include="Resource\awesomeface.png" />
     <Image Include="Resource\container.jpg" />
     <Image Include="Resource\image_black.jpg" />
-    <Image Include="Resource\image_white.jpg" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

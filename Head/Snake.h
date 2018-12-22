@@ -1,11 +1,5 @@
 #pragma once
 #include "Camera.h"
-enum DIRECATION = {
-	FORWARD,
-	BACKWARD,
-	LEFT,
-	RIGHT
-};
 class Snake
 {
 public:
