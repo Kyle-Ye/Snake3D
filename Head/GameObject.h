@@ -4,22 +4,15 @@ class GameObject
 {
 	friend class Scene;
 public:
+	GameObject() = default;
 	GameObject(Scene *scene, Shader *shader, Model *model);
-	GameObject(Scene *scene, Shader *shader, float *vectices, int size);
-	~GameObject();
+	virtual ~GameObject();
 protected:
-	
-	float *vertices;
-	int size;
+	glm::vec3 position;
 	Scene *scene;	
-	Shader *shader;
-	Model *model;							
-	GameObject *parent;							
-	std::list<GameObject*> childrenList;		
-
-	bool isRendereringEnable = true;
-	bool isPreActive;
-	bool isActivity;
-
+	Shader *shader;						
+	GameObject *parent;
+	GameObject *child;
+	void Draw();
 };
 

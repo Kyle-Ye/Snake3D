@@ -1,4 +1,4 @@
-#include "MainWindow.h"
+#include "../Head/MainWindow.h"
 
 #define SIZE_M 20
 #define SIZE_N 20

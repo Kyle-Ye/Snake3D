@@ -1,4 +1,4 @@
-#include "GameObject.h"
+#include "../Head/GameObject.h"
 
 GameObject::GameObject(Scene *scene,Shader *shader,Model *model)
 {

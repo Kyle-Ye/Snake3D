@@ -1,4 +1,4 @@
-#include "Mesh.h"
+#include "../Head/Mesh.h"
 using std::string;
 using std::to_string;
 Mesh::Mesh(std::vector<Vertex> vertices, std::vector<unsigned int> indices, std::vector<Texture> textures)

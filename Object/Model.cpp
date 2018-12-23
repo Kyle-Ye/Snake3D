@@ -1,4 +1,4 @@
-#include "Model.h"
+#include "../Head/Model.h"
 
 using std::string;
 using std::vector;
