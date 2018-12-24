@@ -45,6 +45,12 @@
     <ClCompile Include="Object\SpritRenderer.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="Object\GameObject.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\GameLevel.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include=".gitignore" />
@@ -108,7 +114,10 @@
     <ClInclude Include="Head\ResourceManager.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="Head\SpritRenderer.h">
+    <ClInclude Include="Head\GameLevel.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Head\SpriteRenderer.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

@@ -1,6 +1,6 @@
 #include "../Head/Game.h"
 #include "../Head/ResourceManager.h"
-#include "../Head/SpritRenderer.h"
+#include "../Head/SpriteRenderer.h"
 
 // Game-related State data
 SpriteRenderer  *Renderer;

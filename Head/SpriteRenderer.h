@@ -2,8 +2,8 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 
-#include "../Head/Texture2D.h"
-#include "../Head/Shader.h"
+#include "Texture2D.h"
+#include "Shader.h"
 
 
 class SpriteRenderer

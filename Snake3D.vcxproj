@@ -124,6 +124,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Object\GameLevel.cpp" />
+    <ClCompile Include="Object\GameObject.cpp" />
     <ClCompile Include="Source\Game.cpp" />
     <ClCompile Include="Source\MainWindow.cpp" />
     <ClCompile Include="Object\SpritRenderer.cpp" />
@@ -146,6 +148,7 @@
     <None Include="shader\sprite.vs" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Head\GameLevel.h" />
     <ClInclude Include="Head\Game.h" />
     <ClInclude Include="Head\Box.h" />
     <ClInclude Include="Head\GameObject.h" />
@@ -163,7 +166,7 @@
     <ClInclude Include="Head\Scene.h" />
     <ClInclude Include="Head\Texture2D.h" />
     <ClInclude Include="Head\ResourceManager.h" />
-    <ClInclude Include="Head\SpritRenderer.h" />
+    <ClInclude Include="Head\SpriteRenderer.h" />
   </ItemGroup>
   <ItemGroup>
     <Library Include="lib\glfw3.lib" />
