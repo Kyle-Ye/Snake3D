@@ -18,7 +18,7 @@ const unsigned int SCR_HEIGHT = 540;//1080
 Game SnakeGame(SCR_WIDTH,SCR_HEIGHT);
 
 // Camera
-Camera camera(glm::vec3(0.0f, 0.0f, 3.0f));
+Camera ResourceManager::camera = (glm::vec3(0.0f, 0.0f, 3.0f));
 int cursor_flag = 1;
 bool firstMode = true;
 float lastX = (float)SCR_WIDTH / 2.0f;
@@ -93,9 +93,10 @@ void MainWindow::MainLoop()
 		glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-		SnakeGame.ProcessInput(deltaTime);
+
 		SnakeGame.Update(deltaTime);
 		SnakeGame.Render();
+
 
 		glfwSwapBuffers(window);
 		glfwPollEvents();
@@ -118,9 +119,9 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
 	if (key >= 0 && key < 1024)
 	{
 		if (action == GLFW_PRESS)
-			Breakout.Keys[key] = GL_TRUE;
+			SnakeGame.Keys[key] = GL_TRUE;
 		else if (action == GLFW_RELEASE)
-			Breakout.Keys[key] = GL_FALSE;
+			SnakeGame.Keys[key] = GL_FALSE;
 	}
 }
 void cursor_enter_callback(GLFWwindow * window, int entered)
@@ -155,11 +156,11 @@ void mouse_callback(GLFWwindow * window, double xpos, double ypos)
 	lastX = (float)xpos;
 	lastY = (float)ypos;
 
-	camera.ProcessMouseMovement(xoffset, yoffset);
+	ResourceManager::camera.ProcessMouseMovement(xoffset, yoffset);
 }
 void scroll_callback(GLFWwindow * window, double xoffset, double yoffset)
 {
-	camera.ProcessMouseScroll(yoffset);
+	ResourceManager::camera.ProcessMouseScroll(yoffset);
 }
 void processInput(GLFWwindow *window)
 {
@@ -176,13 +177,13 @@ void processInput(GLFWwindow *window)
 		snake.move();*/
 	float cameraSpeed = 2.5f * deltaTime;
 	if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
-		camera.ProcessKeyboard(FORWARD, deltaTime);
+		ResourceManager::camera.ProcessKeyboard(FORWARD, deltaTime);
 	if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
-		camera.ProcessKeyboard(BACKWARD, deltaTime);
+		ResourceManager::camera.ProcessKeyboard(BACKWARD, deltaTime);
 	if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
-		camera.ProcessKeyboard(LEFT, deltaTime);
+		ResourceManager::camera.ProcessKeyboard(LEFT, deltaTime);
 	if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
-		camera.ProcessKeyboard(RIGHT, deltaTime);
+		ResourceManager::camera.ProcessKeyboard(RIGHT, deltaTime);
 	if (glfwGetKey(window, GLFW_KEY_GRAVE_ACCENT) == GLFW_PRESS)
 	{
 		cursor_flag *= -1;

@@ -1,11 +1,5 @@
 #include "../Head/Shader.h"
 
-Shader::~Shader()
-{
-	glDeleteProgram(ID);
-	std::cout << "Shader" << ID << " has been deleted" << std::endl;
-}
-
 Shader & Shader::Use()
 {
 	glUseProgram(this->ID);

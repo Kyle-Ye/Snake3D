@@ -12,7 +12,6 @@ public:
 	GLuint ID;
 	Shader() {}
 	Shader &Use();
-	~Shader();
 	void Compile(const GLchar *vertexSource, const GLchar *fragmentSource, const GLchar *geometrySource = nullptr);
 	void SetFloat(const GLchar *name, GLfloat value, GLboolean useShader = false);
 	void SetInteger(const GLchar *name, GLint value, GLboolean useShader = false);

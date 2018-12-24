@@ -4,6 +4,7 @@
 #include <glad/glad.h>
 #include "Shader.h"
 #include "Texture2D.h"
+#include "Camera.h"
 
 // A static singleton ResourceManager class that hosts several
 // functions to load Textures and Shaders. Each loaded texture
@@ -16,14 +17,15 @@ public:
 	// Resource storage
 	static std::map<std::string, Shader>    Shaders;
 	static std::map<std::string, Texture2D> Textures;
+	static Camera camera;
 	// Loads (and generates) a shader program from file loading vertex, fragment (and geometry) shader's source code. If gShaderFile is not nullptr, it also loads a geometry shader
 	static Shader   LoadShader(const GLchar *vShaderFile, const GLchar *fShaderFile, const GLchar *gShaderFile, std::string name);
 	// Retrieves a stored sader
-	static Shader   GetShader(std::string name);
+	static Shader&  GetShader(std::string name);
 	// Loads (and generates) a texture from file
 	static Texture2D LoadTexture(const GLchar *file, GLboolean alpha, std::string name);
 	// Retrieves a stored texture
-	static Texture2D GetTexture(std::string name);
+	static Texture2D& GetTexture(std::string name);
 	// Properly de-allocates all loaded resources
 	static void      Clear();
 private:
