@@ -15,7 +15,7 @@
 const unsigned int SCR_WIDTH = 960;//1920
 const unsigned int SCR_HEIGHT = 540;//1080
 
-Game SnakeGame(SCR_WIDTH,SCR_HEIGHT);
+Game SnakeGame(SCR_WIDTH, SCR_HEIGHT);
 
 // Camera
 Camera ResourceManager::camera = (glm::vec3(0.0f, 0.0f, 3.0f));
@@ -31,7 +31,6 @@ float deltaTime = 0.0f;// time between current frame and last frame
 float lastFrame = 0.0f;
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
-void key_callback(GLFWwindow* window, int key, int scancode, int action, int mode);
 void cursor_enter_callback(GLFWwindow* window, int entered);
 void mouse_callback(GLFWwindow* window, double xpos, double ypos);
 void scroll_callback(GLFWwindow* window, double xoffset, double yoffset);
@@ -39,13 +38,13 @@ void processInput(GLFWwindow *window);
 
 MainWindow::MainWindow()
 {
-	success = WindowInit(SCR_WIDTH,SCR_HEIGHT,"Snake");
+	success = WindowInit(SCR_WIDTH, SCR_HEIGHT, "Snake");
 }
-MainWindow::MainWindow(const int width,const int height,const std::string title)
+MainWindow::MainWindow(const int width, const int height, const std::string title)
 {
-	this->success = WindowInit(width,height,title);
+	this->success = WindowInit(width, height, title);
 }
-bool MainWindow::WindowInit(const int width, const int height,const std::string title)
+bool MainWindow::WindowInit(const int width, const int height, const std::string title)
 {
 	glfwInit();
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
@@ -64,7 +63,6 @@ bool MainWindow::WindowInit(const int width, const int height,const std::string 
 	glfwMakeContextCurrent(window);
 
 	glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
-	glfwSetKeyCallback(window, key_callback);
 	glfwSetCursorEnterCallback(window, cursor_enter_callback);
 	glfwSetCursorPosCallback(window, mouse_callback);
 	glfwSetScrollCallback(window, scroll_callback);
@@ -74,14 +72,31 @@ bool MainWindow::WindowInit(const int width, const int height,const std::string 
 		std::cout << "Failed to initialize GLAD" << std::endl;
 		return false;
 	}
-	
+
 	glEnable(GL_DEPTH_TEST);
 	return true;
 }
 void MainWindow::MainLoop()
 {
+	SnakeGame.State = GAME_START;
+	SnakeGame.ViewInit();
+	while (SnakeGame.State == GAME_START)
+	{
+		processInput(window);
+		if (glfwWindowShouldClose(window))
+			break;
+
+		glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+		SnakeGame.ViewUpdate();
+		SnakeGame.ViewRender();
+
+		glfwSwapBuffers(window);
+		glfwPollEvents();
+	}
+
 	SnakeGame.Init();
-	SnakeGame.State = GAME_ACTIVE;
 	while (!glfwWindowShouldClose(window))
 	{
 		float currentFrame = (float)glfwGetTime();
@@ -110,18 +125,6 @@ MainWindow::~MainWindow()
 void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 {
 	glViewport(0, 0, width, height);
-}
-void key_callback(GLFWwindow* window, int key, int scancode, int action, int mode)
-{
-	if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
-		glfwSetWindowShouldClose(window, GL_TRUE);
-	if (key >= 0 && key < 1024)
-	{
-		if (action == GLFW_PRESS)
-			SnakeGame.Keys[key] = GL_TRUE;
-		else if (action == GLFW_RELEASE)
-			SnakeGame.Keys[key] = GL_FALSE;
-	}
 }
 void cursor_enter_callback(GLFWwindow * window, int entered)
 {
@@ -163,26 +166,50 @@ void scroll_callback(GLFWwindow * window, double xoffset, double yoffset)
 }
 void processInput(GLFWwindow *window)
 {
+	//注意速度问题 乘以deltaTime
+	//demo：
+	//	if (this->State == GAME_ACTIVE)
+	//	{
+	//		GLfloat velocity = PLAYER_VELOCITY * dt;
+	//		// Move playerboard
+	//		if (this->Keys[GLFW_KEY_A])
+	//		{
+	//			if (Player->Position.x >= 0)
+	//				Player->Position.x -= velocity;
+	//		}
+	//		if (this->Keys[GLFW_KEY_D])
+	//		{
+	//			if (Player->Position.x <= this->Width - Player->Size.x)
+	//				Player->Position.x += velocity;
+	//		}
+	//	}
 
 	if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
 		glfwSetWindowShouldClose(window, true);
-	/*if (glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS)
-		snake.move();
-	if (glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS)
-		snake.move();
-	if (glfwGetKey(window, GLFW_KEY_LEFT) == GLFW_PRESS)
-		snake.move();
-	if (glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS)
-		snake.move();*/
-	float cameraSpeed = 2.5f * deltaTime;
-	if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
-		ResourceManager::camera.ProcessKeyboard(FORWARD, deltaTime);
-	if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
-		ResourceManager::camera.ProcessKeyboard(BACKWARD, deltaTime);
-	if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
-		ResourceManager::camera.ProcessKeyboard(LEFT, deltaTime);
-	if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
-		ResourceManager::camera.ProcessKeyboard(RIGHT, deltaTime);
+	if (SnakeGame.State == GAME_START)
+	{
+		if (glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS)
+			;
+			if (glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS)
+				;
+				if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
+					;
+					if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
+						;
+	}
+	else
+	{
+		float cameraSpeed = 2.5f * deltaTime;
+		if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
+			ResourceManager::camera.ProcessKeyboard(FORWARD, deltaTime);
+		if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
+			ResourceManager::camera.ProcessKeyboard(BACKWARD, deltaTime);
+		if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
+			ResourceManager::camera.ProcessKeyboard(LEFT, deltaTime);
+		if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
+			ResourceManager::camera.ProcessKeyboard(RIGHT, deltaTime);
+	}
+
 	if (glfwGetKey(window, GLFW_KEY_GRAVE_ACCENT) == GLFW_PRESS)
 	{
 		cursor_flag *= -1;

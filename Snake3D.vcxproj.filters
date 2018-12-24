@@ -134,5 +134,26 @@
     <Image Include="Resource\image_black.jpg">
       <Filter>资源文件</Filter>
     </Image>
+    <Image Include="textures\awesomeface.png">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="textures\background.jpg">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="textures\begin_view.jpg">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="textures\block.png">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="textures\block_solid.png">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="textures\container.jpg">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="textures\paddle.png">
+      <Filter>资源文件</Filter>
+    </Image>
   </ItemGroup>
 </Project>

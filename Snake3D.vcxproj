@@ -175,6 +175,13 @@
     <Image Include="Resource\awesomeface.png" />
     <Image Include="Resource\container.jpg" />
     <Image Include="Resource\image_black.jpg" />
+    <Image Include="textures\awesomeface.png" />
+    <Image Include="textures\background.jpg" />
+    <Image Include="textures\begin_view.jpg" />
+    <Image Include="textures\block.png" />
+    <Image Include="textures\block_solid.png" />
+    <Image Include="textures\container.jpg" />
+    <Image Include="textures\paddle.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

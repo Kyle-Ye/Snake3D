@@ -5,6 +5,7 @@
 
 #include "GameLevel.h"
 enum GameState {
+	GAME_START,
 	GAME_ACTIVE,
 	GAME_MENU,
 	GAME_WIN
@@ -33,7 +34,10 @@ public:
 	// Initialize game state (load all shaders/textures/levels)
 	void Init();
 	// GameLoop
-	void ProcessInput(GLfloat dt);
 	void Update(GLfloat dt);
 	void Render();
+
+	void ViewInit();
+	void ViewUpdate();
+	void ViewRender();
 };
