@@ -97,7 +97,6 @@ void MainWindow::MainLoop()
 		SnakeGame.Update(deltaTime);
 		SnakeGame.Render();
 
-
 		glfwSwapBuffers(window);
 		glfwPollEvents();
 	}
