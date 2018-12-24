@@ -54,13 +54,13 @@
   </ItemGroup>
   <ItemGroup>
     <None Include=".gitignore" />
-    <None Include="shader\naosuit_withoutlight.fs" />
-    <None Include="shader\naosuit_withoutlight.vs" />
-    <None Include="shader\box.fs" />
-    <None Include="shader\box.vs" />
     <None Include="assimp-vc140-mt.dll" />
-    <None Include="shader\sprite.fs" />
-    <None Include="shader\sprite.vs" />
+    <None Include="shaders\box.fs" />
+    <None Include="shaders\box.vs" />
+    <None Include="shaders\naosuit_withoutlight.fs" />
+    <None Include="shaders\naosuit_withoutlight.vs" />
+    <None Include="shaders\sprite.fs" />
+    <None Include="shaders\sprite.vs" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Head\Shader.h">
