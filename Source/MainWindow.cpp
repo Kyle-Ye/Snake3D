@@ -1,8 +1,21 @@
 #include "../Head/MainWindow.h"
 
-#define SIZE_M 20
-#define SIZE_N 20
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
 
+#include <assimp/Importer.hpp>
+#include <assimp/scene.h>
+#include <assimp/postprocess.h>
+
+#include "../Head/Game.h"
+#include "../Head/ResourceManager.h"
+#include "../Head/Camera.h"
+
+const unsigned int SCR_WIDTH = 960;//1920
+const unsigned int SCR_HEIGHT = 540;//1080
+
+Game SnakeGame(SCR_WIDTH,SCR_HEIGHT);
 
 // Camera
 Camera camera(glm::vec3(0.0f, 0.0f, 3.0f));
@@ -17,10 +30,98 @@ float visibility_value = 0.2f;
 float deltaTime = 0.0f;// time between current frame and last frame
 float lastFrame = 0.0f;
 
+void framebuffer_size_callback(GLFWwindow* window, int width, int height);
+void key_callback(GLFWwindow* window, int key, int scancode, int action, int mode);
+void cursor_enter_callback(GLFWwindow* window, int entered);
+void mouse_callback(GLFWwindow* window, double xpos, double ypos);
+void scroll_callback(GLFWwindow* window, double xoffset, double yoffset);
+void processInput(GLFWwindow *window);
 
+MainWindow::MainWindow()
+{
+	success = WindowInit(SCR_WIDTH,SCR_HEIGHT,"Snake");
+}
+MainWindow::MainWindow(const int width,const int height,const std::string title)
+{
+	this->success = WindowInit(width,height,title);
+}
+bool MainWindow::WindowInit(const int width, const int height,const std::string title)
+{
+	glfwInit();
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+
+	GLFWmonitor *monitor = glfwGetPrimaryMonitor();
+	const GLFWvidmode * mode = glfwGetVideoMode(monitor);
+	window = glfwCreateWindow(width, height, title.c_str(), NULL, NULL);
+	if (window == NULL)
+	{
+		std::cout << "Failed to create GLFW window" << std::endl;
+		glfwTerminate();
+		return false;
+	}
+	glfwMakeContextCurrent(window);
+
+	glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
+	glfwSetKeyCallback(window, key_callback);
+	glfwSetCursorEnterCallback(window, cursor_enter_callback);
+	glfwSetCursorPosCallback(window, mouse_callback);
+	glfwSetScrollCallback(window, scroll_callback);
+
+	if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
+	{
+		std::cout << "Failed to initialize GLAD" << std::endl;
+		return false;
+	}
+	
+	glEnable(GL_DEPTH_TEST);
+	return true;
+}
+void MainWindow::MainLoop()
+{
+	SnakeGame.Init();
+	SnakeGame.State = GAME_ACTIVE;
+	while (!glfwWindowShouldClose(window))
+	{
+		float currentFrame = (float)glfwGetTime();
+		deltaTime = currentFrame - lastFrame;
+		lastFrame = currentFrame;
+
+		processInput(window);
+
+		glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+		SnakeGame.ProcessInput(deltaTime);
+		SnakeGame.Update(deltaTime);
+		SnakeGame.Render();
+
+		glfwSwapBuffers(window);
+		glfwPollEvents();
+	}
+	ResourceManager::Clear();
+	return;
+}
+MainWindow::~MainWindow()
+{
+	glfwTerminate();
+}
 void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 {
 	glViewport(0, 0, width, height);
+}
+void key_callback(GLFWwindow* window, int key, int scancode, int action, int mode)
+{
+	if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
+		glfwSetWindowShouldClose(window, GL_TRUE);
+	if (key >= 0 && key < 1024)
+	{
+		if (action == GLFW_PRESS)
+			Breakout.Keys[key] = GL_TRUE;
+		else if (action == GLFW_RELEASE)
+			Breakout.Keys[key] = GL_FALSE;
+	}
 }
 void cursor_enter_callback(GLFWwindow * window, int entered)
 {
@@ -65,14 +166,14 @@ void processInput(GLFWwindow *window)
 
 	if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
 		glfwSetWindowShouldClose(window, true);
-	if (glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS)
+	/*if (glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS)
 		snake.move();
 	if (glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS)
 		snake.move();
 	if (glfwGetKey(window, GLFW_KEY_LEFT) == GLFW_PRESS)
 		snake.move();
 	if (glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS)
-		snake.move();
+		snake.move();*/
 	float cameraSpeed = 2.5f * deltaTime;
 	if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
 		camera.ProcessKeyboard(FORWARD, deltaTime);
@@ -94,131 +195,4 @@ void processInput(GLFWwindow *window)
 	if (glfwGetKey(window, GLFW_KEY_P) == GLFW_PRESS)
 		glPolygonMode(GL_FRONT, GL_LINE);
 
-}
-
-MainWindow::MainWindow()
-{
-	success = WindowInit(SCR_WIDTH,SCR_HEIGHT,"Snake");
-}
-MainWindow::MainWindow(const int width,const int height,const std::string title)
-{
-	success = WindowInit(width,height,title);
-}
-bool MainWindow::WindowInit(const int width, const int height,const std::string title)
-{
-	glfwInit();
-	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
-	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-
-	GLFWmonitor *monitor = glfwGetPrimaryMonitor();
-	const GLFWvidmode * mode = glfwGetVideoMode(monitor);
-	window = glfwCreateWindow(width, height, title.c_str(), NULL, NULL);
-	if (window == NULL)
-	{
-		std::cout << "Failed to create GLFW window" << std::endl;
-		glfwTerminate();
-		return false;
-	}
-	glfwMakeContextCurrent(window);
-
-	glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
-	glfwSetCursorEnterCallback(window, cursor_enter_callback);
-	glfwSetCursorPosCallback(window, mouse_callback);
-	glfwSetScrollCallback(window, scroll_callback);
-
-	if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
-	{
-		std::cout << "Failed to initialize GLAD" << std::endl;
-		return false;
-	}
-	
-	glEnable(GL_DEPTH_TEST);
-	return true;
-}
-void MainWindow::MainLoop()
-{
-	float vertices[] = {
-		-0.5f, -0.5f, -0.5f, 
-		 0.5f, -0.5f, -0.5f,
-		 0.5f,  0.5f, -0.5f,
-		 0.5f,  0.5f, -0.5f,
-		-0.5f,  0.5f, -0.5f,
-		-0.5f, -0.5f, -0.5f,
-
-		-0.5f, -0.5f,  0.5f,
-		 0.5f, -0.5f,  0.5f,
-		 0.5f,  0.5f,  0.5f,
-		 0.5f,  0.5f,  0.5f,
-		-0.5f,  0.5f,  0.5f,
-		-0.5f, -0.5f,  0.5f,
-
-		-0.5f,  0.5f,  0.5f,
-		-0.5f,  0.5f, -0.5f,
-		-0.5f, -0.5f, -0.5f,
-		-0.5f, -0.5f, -0.5f,
-		-0.5f, -0.5f,  0.5f,
-		-0.5f,  0.5f,  0.5f,
-
-		 0.5f,  0.5f,  0.5f,
-		 0.5f,  0.5f, -0.5f,
-		 0.5f, -0.5f, -0.5f,  
-		 0.5f, -0.5f, -0.5f,  
-		 0.5f, -0.5f,  0.5f, 
-		 0.5f,  0.5f,  0.5f, 
-
-		-0.5f, -0.5f, -0.5f,
-		 0.5f, -0.5f, -0.5f,
-		 0.5f, -0.5f,  0.5f,
-		 0.5f, -0.5f,  0.5f,
-		-0.5f, -0.5f,  0.5f,
-		-0.5f, -0.5f, -0.5f,
-
-		-0.5f,  0.5f, -0.5f,
-		 0.5f,  0.5f, -0.5f, 
-		 0.5f,  0.5f,  0.5f,
-		 0.5f,  0.5f,  0.5f,
-		-0.5f,  0.5f,  0.5f,
-		-0.5f,  0.5f, -0.5f,
-	};
-	Scene scene;
-	Shader naosuitShader("Shader/naosuit_withoutlight.vs", "Shader/naosuit_withoutlight.fs");
-	Shader boxShader("Shader/box.vs", "Shader/box.fs");
-	Model Naosuit("Resource/nanosuit/nanosuit.obj");
-	GameObject nausuit(&scene,&naosuitShader,&Naosuit);
-	GameObject box(&scene,&boxShader,vertices,36);
-	while (!glfwWindowShouldClose(window))
-	{
-		float currentFrame = (float)glfwGetTime();
-		deltaTime = currentFrame - lastFrame;
-		lastFrame = currentFrame;
-
-		processInput(window);
-
-		glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-		/*naosuitShader.Enable();
-
-		glm::mat4 projection = glm::mat4(1.0f);
-		projection = glm::perspective(glm::radians(camera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
-		glm::mat4 view = camera.GetViewMatrix();
-		glm::mat4 model = glm::mat4(1.0f);
-		model = glm::translate(model, glm::vec3(0.0f, -1.75f, 0.0f));
-		model = glm::scale(model, glm::vec3(0.2f, 0.2f, 0.2f));
-
-		naosuitShader.setMat4("projection", projection);
-		naosuitShader.setMat4("view", view);
-		naosuitShader.setMat4("model", model);
-
-		Naosuit.Draw(naosuitShader);*/
-		scene.FrameCycle();
-
-		glfwSwapBuffers(window);
-		glfwPollEvents();
-	}
-}
-MainWindow::~MainWindow()
-{
-	glfwTerminate();
 }

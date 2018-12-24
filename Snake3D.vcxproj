@@ -124,17 +124,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Object\Box.cpp" />
-    <ClCompile Include="Object\GameObject.cpp" />
+    <ClCompile Include="Object\Game.cpp" />
+    <ClCompile Include="Source\MainWindow.cpp" />
+    <ClCompile Include="Util\ResourceManager.cpp" />
+    <ClCompile Include="Util\Texture2D.cpp" />
     <ClCompile Include="Util\Camera.cpp" />
-    <ClCompile Include="Object\Mesh.cpp" />
     <ClCompile Include="include\glad\glad.c" />
     <ClCompile Include="Util\Shader.cpp" />
-    <ClCompile Include="Object\Model.cpp" />
     <ClCompile Include="include\stb_image.cpp" />
-    <ClCompile Include="Object\Snake.cpp" />
-    <ClCompile Include="Source\MainWindow.cpp" />
-    <ClCompile Include="Object\Scene.cpp" />
     <ClCompile Include="Source\main.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -146,6 +143,7 @@
     <None Include="shader\box.vs" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Head\Game.h" />
     <ClInclude Include="Head\Box.h" />
     <ClInclude Include="Head\GameObject.h" />
     <ClInclude Include="Head\Camera.h" />
@@ -160,6 +158,8 @@
     <ClInclude Include="Head\Snake.h" />
     <ClInclude Include="Head\MainWindow.h" />
     <ClInclude Include="Head\Scene.h" />
+    <ClInclude Include="Head\Texture2D.h" />
+    <ClInclude Include="Head\ResourceManager.h" />
   </ItemGroup>
   <ItemGroup>
     <Library Include="lib\glfw3.lib" />

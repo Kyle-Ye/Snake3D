@@ -30,25 +30,16 @@
     <ClCompile Include="Util\Shader.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="Object\GameObject.cpp">
+    <ClCompile Include="Util\Texture2D.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="Object\Snake.cpp">
+    <ClCompile Include="Util\ResourceManager.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\Game.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="Source\MainWindow.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="Object\Scene.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="Object\Model.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="Object\Mesh.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="Object\Box.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
@@ -101,6 +92,15 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="Head\Box.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Head\Game.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Head\Texture2D.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Head\ResourceManager.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
