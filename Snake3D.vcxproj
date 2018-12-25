@@ -124,12 +124,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Object\Ball.cpp" />
     <ClCompile Include="Object\GameObject.cpp" />
     <ClCompile Include="Object\Mesh.cpp" />
     <ClCompile Include="Object\Model.cpp" />
-    <ClCompile Include="Object\Snake.cpp" />
-    <ClCompile Include="Object\SnakeNode.cpp" />
     <ClCompile Include="Source\Game.cpp" />
     <ClCompile Include="Source\MainWindow.cpp" />
     <ClCompile Include="Object\SpritRenderer2D.cpp" />
@@ -152,14 +149,12 @@
     <None Include="shaders\sprite.vs" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Head\Ball.h" />
     <ClInclude Include="Head\GameLevel.h" />
     <ClInclude Include="Head\Game.h" />
     <ClInclude Include="Head\GameObject.h" />
     <ClInclude Include="Head\Camera.h" />
     <ClInclude Include="Head\Mesh.h" />
     <ClInclude Include="Head\Shader.h" />
-    <ClInclude Include="Head\Snake.h" />
     <ClInclude Include="include\stb_image.h" />
     <ClInclude Include="include\glad\glad.h" />
     <ClInclude Include="include\GLFW\glfw3.h" />
@@ -170,7 +165,6 @@
     <ClInclude Include="Head\Texture2D.h" />
     <ClInclude Include="Head\ResourceManager.h" />
     <ClInclude Include="Head\SpriteRenderer2D.h" />
-    <ClInclude Include="Head\SnakeNode.h" />
   </ItemGroup>
   <ItemGroup>
     <Library Include="lib\glfw3.lib" />

@@ -32,7 +32,8 @@ void Game::Init()
 	ResourceManager::LoadModel("models/ball/Ball.obj","ball",ResourceManager::GetShader("ball"));
 
 	// Set Objects
-	ResourceManager::LoadGameObject(GameObject(ResourceManager::GetModel("nanosuit"),glm::vec3(0.0f,0.0f,0.0f), glm::vec3(0.01f)), "nanosuit");
+	ResourceManager::LoadGameObject(GameObject(ResourceManager::GetModel("nanosuit"),glm::vec3(0.0f,0.0f,0.0f), glm::vec3(0.1f)), "nanosuit");
+	ResourceManager::LoadGameObject(GameObject(ResourceManager::GetModel("ball"), glm::vec3(2.0f, 0.0f, 0.0f), glm::vec3(1.0f)), "ball1");
 
 	//ResourceManager::camera.Bind(ResourceManager::GetGameObject("test"));
 	// Bind camera
