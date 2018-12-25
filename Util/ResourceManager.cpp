@@ -98,7 +98,7 @@ void ResourceManager::UpdateShaderPosition()
 	{
 		iter.second.SetMatrix4("projection", glm::perspective(glm::radians(camera.Zoom), 16.0f/9.0f, 0.1f, 100.0f));
 		iter.second.SetMatrix4("view", camera.GetViewMatrix());
-		iter.second.SetMatrix4("model", glm::mat4(0.5f));
+		//iter.second.SetMatrix4("model", glm::mat4(0.5f));
 	}
 }
 

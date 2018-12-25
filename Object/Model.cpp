@@ -12,7 +12,7 @@ Model::Model()
 {
 }
 // pubic functions
-Model::Model(const GLchar * file,Shader &shader): shader(&shader)
+Model::Model(const GLchar * file,Shader &shader): shader(shader)
 { 
 	string path = file;
 	loadModel(path);
@@ -21,7 +21,7 @@ Model::Model(const GLchar * file,Shader &shader): shader(&shader)
 void Model::Draw()
 {
 	for (unsigned int i = 0; i < meshes.size(); i++)
-	meshes[i]->Draw(this->shader);
+	meshes[i]->Draw(shader);
 }
 
 

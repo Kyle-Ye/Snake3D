@@ -4,7 +4,7 @@ GameObject::GameObject()
 
 }
 GameObject::GameObject(Model &model)
-	: model(&model), Position(0,0,0), Size(0.1f), Color(1.0f),Radian(0.0f) ,Rotation(0.0f),IsSeen(true), Destroyed(false) 
+	: model(&model), Position(0,0,0), Size(0.1f), Color(1.0f),Radian(2.0f) ,Rotation(0.0f,0.0f,1.0f),IsSeen(true), Destroyed(false) 
 { 
 }
 
@@ -15,10 +15,9 @@ GameObject::GameObject(Model &model, glm::vec3 pos, glm::vec3 size, glm::vec3 co
 
 void GameObject::Draw()
 {
-	//glm::mat4 modelMat = glm::mat4(1.0f);
-	//modelMat = glm::translate(modelMat, Position);
-	//modelMat = glm::rotate(modelMat, Radian, Rotation);
-	//this->model->shader->SetMatrix4("model", modelMat);
+	glm::mat4 modelMat = glm::mat4(1.0f);
+	modelMat = glm::translate(modelMat, Position);
+	modelMat = glm::rotate(modelMat, Radian, Rotation);
+	model->shader.SetMatrix4("model",modelMat);
 	model->Draw();
-	//renderer.DrawSprite(this->Sprite, this->Position, this->Size, this->Rotation, this->Color);
 }

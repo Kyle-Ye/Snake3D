@@ -19,7 +19,7 @@ public:
 	Model(const GLchar * path,Shader &shader);
 	void Draw();// draws the model, and thus all its meshes
 private:
-	Shader *shader;
+	Shader shader;
 	// Model Data
 	// ----------
 
