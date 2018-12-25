@@ -12,7 +12,7 @@ public:
 	void Decress();
 
 	void ActivateCamera();
-	const SnakeNode* GetHead();
+	const Ball* GetHead();
 
 	void OnEatFood();
 
