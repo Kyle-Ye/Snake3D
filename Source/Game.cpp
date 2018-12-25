@@ -5,11 +5,11 @@
 
 // Game-related State data
 SpriteRenderer2D  *Renderer;
-GameObject      *Player;
+GameObject     *Player;
 
 
 Game::Game(GLuint width, GLuint height)
-	: State(GAME_START), Keys(), Width(width), Height(height), BeginFlag(1)
+	: State(GAME_START), Width(width), Height(height), BeginFlag(1)
 {
 
 }
@@ -26,16 +26,20 @@ void Game::Init()
 	ResourceManager::LoadShader("shaders/nanosuit.vs", "shaders/nanosuit.fs", nullptr, "nanosuit");
 	ResourceManager::LoadShader("shaders/ball.vs", "shaders/ball.fs", nullptr, "ball");
 
-	// Configure shaders
-	//ResourceManager::GetShader("nanosuit").Use().SetInteger("ball_image", 0);
-	//ResourceManager::GetShader("ball").SetMatrix4("projection", projection);
-
-	// Set Models
+	
+	// Load Models
 	ResourceManager::LoadModel("models/nanosuit/nanosuit.obj", "nanosuit", ResourceManager::GetShader("nanosuit"));
 	ResourceManager::LoadModel("models/ball/Ball.obj","ball",ResourceManager::GetShader("ball"));
 
+	// Set Objects
+	ResourceManager::LoadGameObject(GameObject(ResourceManager::GetModel("nanosuit")), "test");
+
+	//ResourceManager::camera.Bind(ResourceManager::GetGameObject("test"));
 	// Bind camera
 
+	// Configure shaders
+	//ResourceManager::InitShaderPara(Width,Height);
+	//ResourceManager::GetShader("ball").Use().SetInteger("ball_image", 0);
 	// Load levels
 	/*GameLevel one; one.Load("levels/one.lvl", this->Width, this->Height * 0.5);
 	GameLevel two; two.Load("levels/two.lvl", this->Width, this->Height * 0.5);
@@ -49,17 +53,19 @@ void Game::Init()
 	// Configure game objects
 }
 
-void Game::Update(GLfloat dt)
+void Game::Update()
 {
-
+	ResourceManager::UpdateShaderPosition();
 }
 
 void Game::Render()
 {
 	if (this->State == GAME_ACTIVE)
 	{
-		ResourceManager::GetModel("nanosuit").Draw();
-		ResourceManager::GetModel("ball").Draw();
+		//drawÌì¿ÕºĞ
+		//drawµØÍ¼
+		// draw the snake
+		ResourceManager::GetGameObject("test").Draw();
 	}
 }
 

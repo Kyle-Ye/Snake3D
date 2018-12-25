@@ -4,20 +4,21 @@
 
 #include "Texture2D.h"
 #include "SpriteRenderer2D.h"
+#include "Model.h"
 class GameObject
 {
 public:
 	// Object state
-	glm::vec2   Position, Size, Velocity;
+	Model *model;
+	glm::vec3   Position, Size, Rotation;
 	glm::vec3   Color;
-	GLfloat     Rotation;
-	GLboolean   IsSolid;
+	GLfloat     Radian;
+	GLboolean   IsSeen;
 	GLboolean   Destroyed;
-	// Render state
-	Texture2D   Sprite;
+	
 	// Constructor(s)
 	GameObject();
-	GameObject(glm::vec2 pos, glm::vec2 size, Texture2D sprite, glm::vec3 color = glm::vec3(1.0f), glm::vec2 velocity = glm::vec2(0.0f, 0.0f));
-	// Draw sprite
-	virtual void Draw(SpriteRenderer2D &renderer);
+	GameObject(Model &model);
+	GameObject(Model &model,glm::vec3 pos, glm::vec3 size,glm::vec3 color = glm::vec3(1.0f),GLfloat radian = 0.0f,glm::vec3 rotation = glm::vec3(0.0f),GLfloat velocity = 1.0f,GLboolean isSeen = true,GLboolean destroyed = false);
+	void Draw();
 };

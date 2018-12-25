@@ -22,21 +22,25 @@ const GLfloat PLAYER_VELOCITY(500.0f);
 class Game
 {
 public:
-	// Game state
+	// 游戏全局状态
 	GameState              State;
-	GLboolean              Keys[1024];
+	GLuint                 Width, Height;
+	// 初始界面相关变量
 	int 				   BeginFlag;
 	const int              BeginItemNumber = 3;
-	GLuint                 Width, Height;
+	
+	// 游戏关卡
 	std::vector<GameLevel> Levels;
 	GLuint                 Level;
-	// Constructor/Destructor
+
+	// 构造器
 	Game(GLuint width, GLuint height);
 	~Game();
+
 	// Initialize game state (load all shaders/textures/levels)
 	void Init();
 	// GameLoop
-	void Update(GLfloat dt);
+	void Update();
 	void Render();
 
 	void ViewInit();

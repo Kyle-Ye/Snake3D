@@ -18,16 +18,17 @@ Mesh::~Mesh()
 	glDeleteBuffers(1, &EBO);
 }
 
-void Mesh::Draw(Shader &shader)
+void Mesh::Draw(Shader *shader)
 {
 	glActiveTexture(GL_TEXTURE0 );
-	shader.SetInteger("texturediffuse", 0);
+	shader->SetInteger("texturediffuse", 0);
 	if (textures.size())
 	{
 		glBindTexture(GL_TEXTURE_2D, textures[0].id);
 		glActiveTexture(GL_TEXTURE0);
 	}
 	glBindVertexArray(VAO);
+	shader->Use();
 	glDrawElements(GL_TRIANGLES, indices.size(), GL_UNSIGNED_INT, 0);
 }
 

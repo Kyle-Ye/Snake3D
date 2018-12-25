@@ -3,6 +3,7 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <vector>
+#include "GameObject.h"
 enum Camera_Movement {
 	FORWARD,
 	BACKWARD,
@@ -31,7 +32,7 @@ public:
 	void ProcessMouseMovement(float xoffset, float yoffset, GLboolean constrainPitch = true);
 	void ProcessMouseScroll(float yoffset);
 	glm::vec3 getPosition();
-
+	void Bind(GameObject &gameObject);
 private:
 	glm::vec3 Position;
 	glm::vec3 Front;

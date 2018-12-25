@@ -71,6 +71,10 @@ glm::vec3 Camera::getPosition()
 	return Position;
 }
 
+void Camera::Bind(GameObject & gameObject)
+{
+}
+
 void Camera::updateCameraVectors()
 {
 	glm::vec3 front;

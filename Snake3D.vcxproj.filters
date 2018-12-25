@@ -45,9 +45,6 @@
     <ClCompile Include="Object\GameObject.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="Object\GameLevel.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="Object\SpritRenderer2D.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
@@ -96,19 +93,10 @@
     <ClInclude Include="Head\Model.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="Head\Snake.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="Head\MainWindow.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="Head\Scene.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="Head\GameObject.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="Head\Box.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="Head\Game.h">

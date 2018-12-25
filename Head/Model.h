@@ -13,12 +13,13 @@
 class Model
 {
 friend class ResourceManager;
+friend class GameObject;
 public:
 	Model();
-	Model(const GLchar * path,Shader shader);
+	Model(const GLchar * path,Shader &shader);
 	void Draw();// draws the model, and thus all its meshes
 private:
-	Shader shader;
+	Shader *shader;
 	// Model Data
 	// ----------
 

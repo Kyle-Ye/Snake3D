@@ -9,8 +9,18 @@
 // Instantiate static variables
 std::map<std::string, Texture2D>    ResourceManager::Textures;
 std::map<std::string, Shader>       ResourceManager::Shaders;
-std::map<std::string, Model>       ResourceManager::Models;
+std::map<std::string, Model>        ResourceManager::Models;
+std::map<std::string, GameObject>   ResourceManager::GameObjects;
 
+void ResourceManager::BindCamera(GameObject &gameObject)
+{
+	camera.Bind(gameObject);
+}
+
+void ResourceManager::UnbindCamera()
+{
+	//camera.Bind();
+}
 
 Shader ResourceManager::LoadShader(const GLchar *vShaderFile, const GLchar *fShaderFile, const GLchar *gShaderFile, std::string name)
 {
@@ -45,6 +55,17 @@ Model & ResourceManager::GetModel(std::string name)
 	return Models[name];
 }
 
+GameObject ResourceManager::LoadGameObject(GameObject gameObject, std::string name)
+{
+	GameObjects[name] = gameObject;
+	return GameObjects[name];
+}
+
+GameObject & ResourceManager::GetGameObject(std::string name)
+{
+	return GameObjects[name];
+}
+
 void ResourceManager::Clear()
 {
 	// (Properly) delete all shaders	
@@ -64,6 +85,21 @@ void ResourceManager::Clear()
 	Shaders.erase(Shaders.begin(), Shaders.end());
 	Textures.erase(Textures.begin(), Textures.end());
 	Models.erase(Models.begin(), Models.end());
+}
+
+void ResourceManager::InitShaderPara(GLuint width, GLuint height)
+{
+	
+}
+
+void ResourceManager::UpdateShaderPosition()
+{
+	for (auto iter : Shaders)
+	{
+		iter.second.SetMatrix4("projection", glm::perspective(glm::radians(camera.Zoom), 16.0f/9.0f, 0.1f, 100.0f));
+		iter.second.SetMatrix4("view", camera.GetViewMatrix());
+		iter.second.SetMatrix4("model", glm::mat4(0.5f));
+	}
 }
 
 Shader ResourceManager::loadShaderFromFile(const GLchar *vShaderFile, const GLchar *fShaderFile, const GLchar *gShaderFile)

@@ -111,7 +111,7 @@ void MainWindow::MainLoop()
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 
-		SnakeGame.Update(deltaTime);
+		SnakeGame.Update();
 		SnakeGame.Render();
 
 		glfwSwapBuffers(window);
@@ -208,7 +208,6 @@ void processInput(GLFWwindow *window)
 				break;
 			}
 		}
-			
 		if (glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS)
 		{
 			if (SnakeGame.BeginFlag < SnakeGame.BeginItemNumber)
@@ -223,7 +222,6 @@ void processInput(GLFWwindow *window)
 			else SnakeGame.BeginFlag = SnakeGame.BeginItemNumber;
 			Sleep(100);
 		}
-
 	}
 	if (SnakeGame.State == GAME_ACTIVE)
 	{

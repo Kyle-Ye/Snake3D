@@ -12,7 +12,7 @@ Model::Model()
 {
 }
 // pubic functions
-Model::Model(const GLchar * file,Shader shader): shader(shader)
+Model::Model(const GLchar * file,Shader &shader): shader(&shader)
 { 
 	string path = file;
 	loadModel(path);

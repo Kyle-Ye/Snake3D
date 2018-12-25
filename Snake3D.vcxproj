@@ -124,7 +124,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Object\GameLevel.cpp" />
     <ClCompile Include="Object\GameObject.cpp" />
     <ClCompile Include="Object\Mesh.cpp" />
     <ClCompile Include="Object\Model.cpp" />
@@ -152,7 +151,6 @@
   <ItemGroup>
     <ClInclude Include="Head\GameLevel.h" />
     <ClInclude Include="Head\Game.h" />
-    <ClInclude Include="Head\Box.h" />
     <ClInclude Include="Head\GameObject.h" />
     <ClInclude Include="Head\Camera.h" />
     <ClInclude Include="Head\Mesh.h" />
@@ -163,9 +161,7 @@
     <ClInclude Include="include\GLFW\glfw3native.h" />
     <ClInclude Include="include\KHR\khrplatform.h" />
     <ClInclude Include="Head\Model.h" />
-    <ClInclude Include="Head\Snake.h" />
     <ClInclude Include="Head\MainWindow.h" />
-    <ClInclude Include="Head\Scene.h" />
     <ClInclude Include="Head\Texture2D.h" />
     <ClInclude Include="Head\ResourceManager.h" />
     <ClInclude Include="Head\SpriteRenderer2D.h" />
