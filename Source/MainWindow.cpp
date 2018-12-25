@@ -73,7 +73,9 @@ bool MainWindow::WindowInit(const int width, const int height, const std::string
 		return false;
 	}
 
-	glEnable(GL_DEPTH_TEST);
+	glEnable(GL_CULL_FACE);
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	return true;
 }
 void MainWindow::MainLoop()
@@ -188,16 +190,42 @@ void processInput(GLFWwindow *window)
 		glfwSetWindowShouldClose(window, true);
 	if (SnakeGame.State == GAME_START)
 	{
+		if (glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS)
+		{
+			switch (SnakeGame.BeginFlag)
+			{
+			case 1:
+				SnakeGame.State = GAME_ACTIVE;
+				ResourceManager::Clear();
+				break;
+			case 2:
+				//ÓÎÏ·ËµÃ÷
+				break;
+			case 3:
+				glfwSetWindowShouldClose(window, true);
+				break;
+			default:
+				break;
+			}
+		}
+			
+		if (glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS)
+		{
+			if (SnakeGame.BeginFlag < SnakeGame.BeginItemNumber)
+				SnakeGame.BeginFlag++;
+			else SnakeGame.BeginFlag = 1;
+			Sleep(100);
+		}
 		if (glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS)
-			;
-			if (glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS)
-				;
-				if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
-					;
-					if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
-						;
+		{
+			if (SnakeGame.BeginFlag >= 1)
+				SnakeGame.BeginFlag--;
+			else SnakeGame.BeginFlag = SnakeGame.BeginItemNumber;
+			Sleep(100);
+		}
+
 	}
-	else
+	if (SnakeGame.State == GAME_ACTIVE)
 	{
 		float cameraSpeed = 2.5f * deltaTime;
 		if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
@@ -209,7 +237,6 @@ void processInput(GLFWwindow *window)
 		if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
 			ResourceManager::camera.ProcessKeyboard(RIGHT, deltaTime);
 	}
-
 	if (glfwGetKey(window, GLFW_KEY_GRAVE_ACCENT) == GLFW_PRESS)
 	{
 		cursor_flag *= -1;

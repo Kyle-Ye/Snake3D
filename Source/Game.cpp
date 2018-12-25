@@ -9,7 +9,7 @@ GameObject      *Player;
 
 
 Game::Game(GLuint width, GLuint height)
-	: State(GAME_START), Keys(), Width(width), Height(height)
+	: State(GAME_START), Keys(), Width(width), Height(height), BeginFlag(1)
 {
 
 }
@@ -23,8 +23,10 @@ Game::~Game()
 void Game::Init()
 {
 	// Load shaders
-	ResourceManager::LoadShader("shaders/sprite.vs", "shaders/sprite.frag", nullptr, "sprite");
+	ResourceManager::LoadShader("shaders/sprite.vs", "shaders/sprite.fs", nullptr, "sprite");
+	ResourceManager::LoadShader("shaders/naosuit_withoutlight.vs", "shaders/naosuit_withoutlight.fs", nullptr, "nausuit");
 
+	// camera
 	// Configure shaders
 	glm::mat4 projection = glm::ortho(0.0f, static_cast<GLfloat>(this->Width), static_cast<GLfloat>(this->Height), 0.0f, -1.0f, 1.0f);
 	ResourceManager::GetShader("sprite").Use().SetInteger("sprite", 0);
@@ -56,7 +58,6 @@ void Game::Update(GLfloat dt)
 
 }
 
-
 void Game::Render()
 {
 	if (this->State == GAME_ACTIVE)
@@ -70,6 +71,7 @@ void Game::Render()
 	}
 }
 
+
 void Game::ViewInit()
 {
 	// Load shaders
@@ -82,8 +84,7 @@ void Game::ViewInit()
 
 	// Load textures
 	ResourceManager::LoadTexture("textures/begin_view.jpg", GL_FALSE, "begin_view");
-	ResourceManager::LoadTexture("textures/game_start2.jpg", GL_FALSE, "game_start");
-	//ResourceManager::LoadTexture("textures/game_over3.png", GL_TRUE, "game_over");
+	ResourceManager::LoadTexture("textures/paddle.png", GL_TRUE, "select_item");
 
 	// Set render-specific controls
 	Renderer = new SpriteRenderer(ResourceManager::GetShader("sprite"));
@@ -92,15 +93,28 @@ void Game::ViewInit()
 
 void Game::ViewUpdate()
 {
-	
+	switch (this->BeginFlag)
+	{
+	case 1:
+		ResourceManager::LoadTexture("textures/begin_item1.png", GL_TRUE, "begin_item");
+		break;
+	case 2:
+		ResourceManager::LoadTexture("textures/begin_item2.png", GL_TRUE, "begin_item");
+		break;
+	case 3:
+		ResourceManager::LoadTexture("textures/begin_item3.png", GL_TRUE, "begin_item");
+		break;
+	default:
+		break;
+	}
 }
 
 void Game::ViewRender()
 {
 	if (this->State == GAME_START)
 	{
-		Renderer->DrawSprite(ResourceManager::GetTexture("game_start"), glm::vec2(200, 100), glm::vec2(227, 46), 0.0f);
-		//Renderer->DrawSprite(ResourceManager::GetTexture("game_over"), glm::vec2(200, 200), glm::vec2(200, 200), 0.0f);
 		Renderer->DrawSprite(ResourceManager::GetTexture("begin_view"),glm::vec2(0, 0), glm::vec2(this->Width, this->Height), 0.0f);
+		Renderer->DrawSprite(ResourceManager::GetTexture("begin_item"), glm::vec2(360, 70 + 90 * this->BeginFlag), glm::vec2(200,100), 0.0f);
+		Renderer->DrawSprite(ResourceManager::GetTexture("select_item"), glm::vec2(200, 100+ 90 * this->BeginFlag), glm::vec2(100, 35), glm::radians(90.0f));
 	}
 }

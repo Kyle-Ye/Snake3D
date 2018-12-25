@@ -25,6 +25,8 @@ public:
 	// Game state
 	GameState              State;
 	GLboolean              Keys[1024];
+	int 				   BeginFlag;
+	const int              BeginItemNumber = 3;
 	GLuint                 Width, Height;
 	std::vector<GameLevel> Levels;
 	GLuint                 Level;
