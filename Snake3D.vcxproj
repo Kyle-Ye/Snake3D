@@ -126,9 +126,11 @@
   <ItemGroup>
     <ClCompile Include="Object\GameLevel.cpp" />
     <ClCompile Include="Object\GameObject.cpp" />
+    <ClCompile Include="Object\Mesh.cpp" />
+    <ClCompile Include="Object\Model.cpp" />
     <ClCompile Include="Source\Game.cpp" />
     <ClCompile Include="Source\MainWindow.cpp" />
-    <ClCompile Include="Object\SpritRenderer.cpp" />
+    <ClCompile Include="Object\SpritRenderer2D.cpp" />
     <ClCompile Include="Util\ResourceManager.cpp" />
     <ClCompile Include="Util\Texture2D.cpp" />
     <ClCompile Include="Util\Camera.cpp" />
@@ -140,10 +142,10 @@
   <ItemGroup>
     <None Include=".gitignore" />
     <None Include="assimp-vc140-mt.dll" />
-    <None Include="shaders\naosuit_withoutlight.fs" />
-    <None Include="shaders\naosuit_withoutlight.vs" />
-    <None Include="shaders\box.fs" />
-    <None Include="shaders\box.vs" />
+    <None Include="shaders\ball.fs" />
+    <None Include="shaders\ball.vs" />
+    <None Include="shaders\nanosuit.fs" />
+    <None Include="shaders\nanosuit.vs" />
     <None Include="shaders\sprite.fs" />
     <None Include="shaders\sprite.vs" />
   </ItemGroup>
@@ -166,7 +168,7 @@
     <ClInclude Include="Head\Scene.h" />
     <ClInclude Include="Head\Texture2D.h" />
     <ClInclude Include="Head\ResourceManager.h" />
-    <ClInclude Include="Head\SpriteRenderer.h" />
+    <ClInclude Include="Head\SpriteRenderer2D.h" />
   </ItemGroup>
   <ItemGroup>
     <Library Include="lib\glfw3.lib" />

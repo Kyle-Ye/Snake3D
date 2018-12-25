@@ -1,4 +1,5 @@
 #include "../Head/Mesh.h"
+#include <iosfwd>
 using std::string;
 using std::to_string;
 Mesh::Mesh(std::vector<Vertex> vertices, std::vector<unsigned int> indices, std::vector<Texture> textures)
@@ -19,26 +20,13 @@ Mesh::~Mesh()
 
 void Mesh::Draw(Shader &shader)
 {
-	unsigned int diffuseNr = 1;
-	unsigned int specularNr = 1;
-	for (unsigned int i = 0; i < textures.size();i++)
+	glActiveTexture(GL_TEXTURE0 );
+	shader.SetInteger("texturediffuse", 0);
+	if (textures.size())
 	{
-		/* Note:
-		** There should be modified according to your requirement
-		*/
-		glActiveTexture(GL_TEXTURE0 + i);
-		std::stringstream in;
-		string number;
-		string name = textures[i].type;
-		if (name == "texture_diffuse")
-			in << diffuseNr++;
-		else if (name == "texture_specular")
-			in << specularNr++;
-		number = in.str();
-		shader.setInt(name + number, i);
-		glBindTexture(GL_TEXTURE_2D, textures[i].id);
+		glBindTexture(GL_TEXTURE_2D, textures[0].id);
+		glActiveTexture(GL_TEXTURE0);
 	}
-	glActiveTexture(GL_TEXTURE0);
 	glBindVertexArray(VAO);
 	glDrawElements(GL_TRIANGLES, indices.size(), GL_UNSIGNED_INT, 0);
 }

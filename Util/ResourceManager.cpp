@@ -9,6 +9,7 @@
 // Instantiate static variables
 std::map<std::string, Texture2D>    ResourceManager::Textures;
 std::map<std::string, Shader>       ResourceManager::Shaders;
+std::map<std::string, Model>       ResourceManager::Models;
 
 
 Shader ResourceManager::LoadShader(const GLchar *vShaderFile, const GLchar *fShaderFile, const GLchar *gShaderFile, std::string name)
@@ -33,6 +34,17 @@ Texture2D& ResourceManager::GetTexture(std::string name)
 	return Textures[name];
 }
 
+Model ResourceManager::LoadModel(const GLchar * file, std::string name,Shader shader)
+{
+	Models[name] = loadModelFromFile(file,shader);
+	return Models[name];
+}
+
+Model & ResourceManager::GetModel(std::string name)
+{
+	return Models[name];
+}
+
 void ResourceManager::Clear()
 {
 	// (Properly) delete all shaders	
@@ -41,6 +53,17 @@ void ResourceManager::Clear()
 	// (Properly) delete all textures
 	for (auto iter : Textures)
 		glDeleteTextures(1, &iter.second.ID);
+	// (Properly) delete all models
+	for (auto iter : Models)
+	{
+		for (Mesh* p : iter.second.meshes) {
+			delete p;
+		}
+		std::cout << "The model has been destroyed" << std::endl;
+	}
+	Shaders.erase(Shaders.begin(), Shaders.end());
+	Textures.erase(Textures.begin(), Textures.end());
+	Models.erase(Models.begin(), Models.end());
 }
 
 Shader ResourceManager::loadShaderFromFile(const GLchar *vShaderFile, const GLchar *fShaderFile, const GLchar *gShaderFile)
@@ -111,4 +134,9 @@ Texture2D ResourceManager::loadTextureFromFile(const GLchar *file, GLboolean alp
 		std::cout << "Failed to load texture1" << std::endl;
 	}
 	return texture;
+}
+
+Model ResourceManager::loadModelFromFile(const GLchar * file,Shader shader)
+{
+	return Model(file,shader);
 }

@@ -3,6 +3,7 @@
 #include <string>
 #include <vector>
 #include "Shader.h"
+#include "Texture2D.h"
 
 struct Vertex {
 	glm::vec3 Position;

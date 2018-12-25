@@ -7,24 +7,24 @@
 #include <assimp/Importer.hpp>
 #include <assimp/scene.h>
 #include <assimp/postprocess.h>
-
+#include "Texture2D.h"
 
 
 class Model
 {
+friend class ResourceManager;
 public:
-
-	Model(std::string const &path,bool gamma = false);
-	void Draw(Shader &shader);// draws the model, and thus all its meshes
-	~Model();
+	Model();
+	Model(const GLchar * path,Shader shader);
+	void Draw();// draws the model, and thus all its meshes
 private:
+	Shader shader;
 	// Model Data
 	// ----------
 
 	std::vector<Mesh*> meshes;
 	std::string directory;
 	std::vector<Texture> textures_loaded;// stores all the textures loaded so far, optimization to make sure textures aren't loaded more than once.
-	bool gammaCorrection;
 	
 	// Functions
 	// ---------

@@ -8,24 +8,20 @@ using glm::vec3;
 using glm::vec2;
 using std::strcmp;
 #include <stb_image.h>
-// pubic functions
-Model::Model(string const &path, bool gamma) : gammaCorrection(gamma)
+Model::Model()
 {
+}
+// pubic functions
+Model::Model(const GLchar * file,Shader shader): shader(shader)
+{ 
+	string path = file;
 	loadModel(path);
 }
 
-void Model::Draw(Shader &shader)
+void Model::Draw()
 {
 	for (unsigned int i = 0; i < meshes.size(); i++)
-		meshes[i]->Draw(shader);
-}
-
-Model::~Model()
-{
-	for (Mesh* p : meshes) {
-		delete p;
-	}
-	cout << "The model has been destroyed" << endl;
+	meshes[i]->Draw(this->shader);
 }
 
 

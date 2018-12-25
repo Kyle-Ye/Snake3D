@@ -42,25 +42,31 @@
     <ClCompile Include="Source\Game.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="Object\SpritRenderer.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="Object\GameObject.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="Object\GameLevel.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="Object\SpritRenderer2D.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\Model.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\Mesh.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include=".gitignore" />
     <None Include="assimp-vc140-mt.dll" />
-    <None Include="shaders\box.fs" />
-    <None Include="shaders\box.vs" />
-    <None Include="shaders\naosuit_withoutlight.fs" />
-    <None Include="shaders\naosuit_withoutlight.vs" />
     <None Include="shaders\sprite.fs" />
     <None Include="shaders\sprite.vs" />
+    <None Include="shaders\ball.fs" />
+    <None Include="shaders\ball.vs" />
+    <None Include="shaders\nanosuit.fs" />
+    <None Include="shaders\nanosuit.vs" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Head\Shader.h">
@@ -117,7 +123,7 @@
     <ClInclude Include="Head\GameLevel.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="Head\SpriteRenderer.h">
+    <ClInclude Include="Head\SpriteRenderer2D.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
