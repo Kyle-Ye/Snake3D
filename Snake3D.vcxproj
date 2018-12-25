@@ -124,6 +124,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Object\Ball.cpp" />
     <ClCompile Include="Object\GameObject.cpp" />
     <ClCompile Include="Object\Mesh.cpp" />
     <ClCompile Include="Object\Model.cpp" />
@@ -149,6 +150,7 @@
     <None Include="shaders\sprite.vs" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Head\Ball.h" />
     <ClInclude Include="Head\GameLevel.h" />
     <ClInclude Include="Head\Game.h" />
     <ClInclude Include="Head\GameObject.h" />

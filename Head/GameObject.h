@@ -14,9 +14,9 @@ public:
 	GLboolean   IsSeen;
 	GLboolean   Destroyed;
 	
-	// Constructor(s)
-	GameObject();
+	GameObject() = default;
 	GameObject(Model &model);
 	GameObject(Model &model,glm::vec3 pos, glm::vec3 size,GLboolean isSeen = true,GLboolean destroyed = false);
+	virtual ~GameObject() = default;
 	void Draw();
 };

@@ -4,7 +4,7 @@ class Ball :
 	public GameObject
 {
 public:
-	Ball();
+	Ball() = default;
 	Ball(glm::vec4 color);
 	void SetColor(glm::vec4 color);
 	~Ball();

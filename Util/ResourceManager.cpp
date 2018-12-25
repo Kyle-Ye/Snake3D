@@ -98,6 +98,7 @@ void ResourceManager::Update()
 	{
 		iter.second.SetMatrix4("projection", glm::perspective(glm::radians(camera.Zoom), 16.0f/9.0f, 0.1f, 100.0f));
 		iter.second.SetMatrix4("view", camera.GetViewMatrix());
+		iter.second.SetVector3f("mColor",0.2,0.3,0.4);
 	}
 }
 void ResourceManager::Render()

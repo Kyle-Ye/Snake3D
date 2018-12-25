@@ -1,9 +1,9 @@
 #version 330 core
 in vec2 TexCoords;
 out vec4 color;
+uniform vec3 mColor;
 
 void main()
 {
-	color = vec4(1.0f,0.6f,0.8f,1.0f);
-	
+	color = vec4(mColor,1.0f);
 }
