@@ -25,6 +25,9 @@ public:
 	float MovementSpeed;
 	float MouseSensitivity;
 	float Zoom;
+	GameObject *object;
+	bool IsBind;
+
 	Camera(glm::vec3 position = glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3 up = glm::vec3(0.0f, 1.0f, 0.0f), float yaw = YAW, float pitch = PITCH);
 	Camera(float posX, float posY, float posZ, float upX, float upY, float upZ, float yaw, float pitch);
 	glm::mat4 GetViewMatrix();
@@ -32,7 +35,8 @@ public:
 	void ProcessMouseMovement(float xoffset, float yoffset, GLboolean constrainPitch = true);
 	void ProcessMouseScroll(float yoffset);
 	glm::vec3 getPosition();
-	void Bind(GameObject &gameObject);
+	void Bind(GameObject *object);
+	void UnBind();
 private:
 	glm::vec3 Position;
 	glm::vec3 Front;

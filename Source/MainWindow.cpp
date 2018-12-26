@@ -11,24 +11,21 @@
 #include "../Head/Game.h"
 #include "../Head/ResourceManager.h"
 #include "../Head/Camera.h"
+#include "../Head/Timer.h"
 
 const unsigned int SCR_WIDTH = 960;//1920
 const unsigned int SCR_HEIGHT = 540;//1080
 
 Game SnakeGame(SCR_WIDTH, SCR_HEIGHT);
+Camera camera = (glm::vec3(0.0f, 0.0f, 3.0f));
+Timer gameTime(0.0,1.0);
 
-// Camera
-Camera ResourceManager::camera = (glm::vec3(0.0f, 0.0f, 3.0f));
 int cursor_flag = 1;
+
 bool firstMode = true;
+
 float lastX = (float)SCR_WIDTH / 2.0f;
 float lastY = (float)SCR_HEIGHT / 2.0f;
-
-float visibility_value = 0.2f;
-
-// timing
-float deltaTime = 0.0f;// time between current frame and last frame
-float lastFrame = 0.0f;
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 void cursor_enter_callback(GLFWwindow* window, int entered);
@@ -101,10 +98,7 @@ void MainWindow::MainLoop()
 	SnakeGame.Init();
 	while (!glfwWindowShouldClose(window))
 	{
-		float currentFrame = (float)glfwGetTime();
-		deltaTime = currentFrame - lastFrame;
-		lastFrame = currentFrame;
-
+		gameTime.Update();
 		processInput(window);
 
 		glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
@@ -225,15 +219,14 @@ void processInput(GLFWwindow *window)
 	}
 	if (SnakeGame.State == GAME_ACTIVE)
 	{
-		float cameraSpeed = 2.5f * deltaTime;
 		if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
-			ResourceManager::camera.ProcessKeyboard(FORWARD, deltaTime);
+			ResourceManager::camera.ProcessKeyboard(FORWARD, gameTime.DeltaTime);
 		if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
-			ResourceManager::camera.ProcessKeyboard(BACKWARD, deltaTime);
+			ResourceManager::camera.ProcessKeyboard(BACKWARD, gameTime.DeltaTime);
 		if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
-			ResourceManager::camera.ProcessKeyboard(LEFT, deltaTime);
+			ResourceManager::camera.ProcessKeyboard(LEFT, gameTime.DeltaTime);
 		if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
-			ResourceManager::camera.ProcessKeyboard(RIGHT, deltaTime);
+			ResourceManager::camera.ProcessKeyboard(RIGHT, gameTime.DeltaTime);
 	}
 	if (glfwGetKey(window, GLFW_KEY_GRAVE_ACCENT) == GLFW_PRESS)
 	{

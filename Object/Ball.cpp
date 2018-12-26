@@ -3,9 +3,9 @@
 Ball::Ball(): color(1.0f)
 {
 }
-Ball::Ball(glm::vec4 color)
+Ball::Ball(Model &model,glm::vec4 color):GameObject(model),color(color)
 {
-	this->color = color;
+
 }
 
 void Ball::SetColor(glm::vec4 color)

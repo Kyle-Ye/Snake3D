@@ -1,12 +1,15 @@
 #include "../Head/Game.h"
+
+#include "../Head/Camera.h"
+#include "../Head/Timer.h"
 #include "../Head/ResourceManager.h"
 #include "../Head/SpriteRenderer2D.h"
 #include "../Head/GameObject.h"
 
 // Game-related State data
 SpriteRenderer2D  *Renderer;
-GameObject     *Player;
-
+extern Camera camera;
+extern Timer gameTime;
 
 Game::Game(GLuint width, GLuint height)
 	: State(GAME_START), Width(width), Height(height), BeginFlag(1)
@@ -17,7 +20,6 @@ Game::Game(GLuint width, GLuint height)
 Game::~Game()
 {
 	delete Renderer;
-	delete Player;
 }
 
 void Game::Init()
@@ -26,19 +28,21 @@ void Game::Init()
 	ResourceManager::LoadShader("shaders/nanosuit.vs", "shaders/nanosuit.fs", nullptr, "nanosuit");
 	ResourceManager::LoadShader("shaders/ball.vs", "shaders/ball.fs", nullptr, "ball");
 
-	
 	// Load Models
 	ResourceManager::LoadModel("models/nanosuit/nanosuit.obj", "nanosuit", ResourceManager::GetShader("nanosuit"));
 	ResourceManager::LoadModel("models/ball/Ball.obj","ball",ResourceManager::GetShader("ball"));
 
+	// Load Textures
+
 	// Set Objects
-	ResourceManager::LoadGameObject(GameObject(ResourceManager::GetModel("nanosuit"),glm::vec3(0.0f,0.0f,0.0f), glm::vec3(0.1f)), "nanosuit");
-	ResourceManager::LoadGameObject(GameObject(ResourceManager::GetModel("ball"), glm::vec3(2.0f, 0.0f, 0.0f), glm::vec3(0.8f)), "ball1");
-	ResourceManager::LoadGameObject(GameObject(ResourceManager::GetModel("ball"), glm::vec3(-2.0f, 0.0f, 0.0f), glm::vec3(0.8f)), "ball2");
-	ResourceManager::LoadGameObject(Ball(ResourceManager::GetModel("ball"), glm::vec3(-2.0f, 0.0f, 0.0f), glm::vec3(0.8f)), "ball2");
+	GameObject(scene,ResourceManager::GetModel("nanosuit"),glm::vec3(0.0f,0.0f,0.0f), glm::vec3(0.1f)), "nanosuit");
+	GameObject(scene,ResourceManager::GetModel("ball"), glm::vec3(2.0f, 0.0f, 0.0f), glm::vec3(0.8f)), "ball1");
+	GameObject(scene,ResourceManager::GetModel("ball"), glm::vec3(-2.0f, 0.0f, 0.0f), glm::vec3(0.8f)), "ball2");
+	LoadGameObject(Ball(ResourceManager::GetModel("ball"), glm::vec3(-2.0f, 0.0f, 0.0f), glm::vec3(0.8f)), "ball2");
 
 	//ResourceManager::camera.Bind(ResourceManager::GetGameObject("test"));
 	// Bind camera
+	camera.bind
 
 	// Configure shaders
 	//ResourceManager::InitShaderPara(Width,Height);

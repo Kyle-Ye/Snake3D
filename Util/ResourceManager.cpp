@@ -10,17 +10,6 @@
 std::map<std::string, Texture2D>    ResourceManager::Textures;
 std::map<std::string, Shader>       ResourceManager::Shaders;
 std::map<std::string, Model>        ResourceManager::Models;
-std::map<std::string, GameObject>   ResourceManager::GameObjects;
-
-void ResourceManager::BindCamera(GameObject &gameObject)
-{
-	camera.Bind(gameObject);
-}
-
-void ResourceManager::UnbindCamera()
-{
-	//camera.Bind();
-}
 
 Shader ResourceManager::LoadShader(const GLchar *vShaderFile, const GLchar *fShaderFile, const GLchar *gShaderFile, std::string name)
 {
@@ -53,17 +42,6 @@ Model ResourceManager::LoadModel(const GLchar * file, std::string name,Shader sh
 Model & ResourceManager::GetModel(std::string name)
 {
 	return Models[name];
-}
-
-GameObject ResourceManager::LoadGameObject(GameObject gameObject, std::string name)
-{
-	GameObjects[name] = gameObject;
-	return GameObjects[name];
-}
-
-GameObject & ResourceManager::GetGameObject(std::string name)
-{
-	return GameObjects[name];
 }
 
 void ResourceManager::Clear()

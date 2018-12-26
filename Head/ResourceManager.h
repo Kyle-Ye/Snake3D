@@ -4,7 +4,6 @@
 #include <glad/glad.h>
 #include "Shader.h"
 #include "Texture2D.h"
-#include "Camera.h"
 #include "Model.h"
 #include "GameObject.h"
 // A static singleton ResourceManager class that hosts several
@@ -19,12 +18,7 @@ public:
 	static std::map<std::string, Shader>    Shaders;
 	static std::map<std::string, Texture2D> Textures;
 	static std::map<std::string, Model> Models;
-	static std::map<std::string, GameObject> GameObjects;
-	static Camera camera;
-
-	static void BindCamera(GameObject &gameObject);
-	static void UnbindCamera();
-
+	
 	static Shader   LoadShader(const GLchar *vShaderFile, const GLchar *fShaderFile, const GLchar *gShaderFile, std::string name);
 	static Shader&  GetShader(std::string name);
 
@@ -34,13 +28,9 @@ public:
 	static Model LoadModel(const GLchar *file, std::string name, Shader shader);
 	static Model& GetModel(std::string name);
 
-	static GameObject LoadGameObject(GameObject gameObject, std::string name);
-	static GameObject& GetGameObject(std::string name);
-
 	static void      Clear();
 	static void      InitShaderPara(GLuint width,GLuint height);
-	static void      Update();
-	static void      Render();
+	
 private:
 	// Private constructor, that is we do not want any actual resource manager objects. Its members and functions should be publicly available (static).
 	ResourceManager() { }

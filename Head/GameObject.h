@@ -5,18 +5,21 @@
 #include "Texture2D.h"
 #include "SpriteRenderer2D.h"
 #include "Model.h"
+#include "Scene.h"
+
 class GameObject
 {
 public:
 	// Object state
+	Scene *scene;
 	Model *model;
-	glm::vec3   Position, Size;
-	GLboolean   IsSeen;
-	GLboolean   Destroyed;
+	glm::vec3   position, size;
+	glm::mat4   modelMat;
 	
 	GameObject() = default;
-	GameObject(Model &model);
-	GameObject(Model &model,glm::vec3 pos, glm::vec3 size,GLboolean isSeen = true,GLboolean destroyed = false);
+	GameObject(Scene *scene,Model *model,glm::vec3 pos, glm::vec3 size);
 	virtual ~GameObject() = default;
-	void Draw();
+	void draw();
+	void update(glm::vec3 position);
+	void update(glm::vec3 position,glm::vec3 size);
 };

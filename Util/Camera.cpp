@@ -1,6 +1,7 @@
 #include "../Head/Camera.h"
 
-Camera::Camera(glm::vec3 position, glm::vec3 up, float yaw, float pitch) :Front(glm::vec3(0.0f, 0.0f, -1.0f)), MovementSpeed(SPEED), MouseSensitivity(SENSITIVITY), Zoom(ZOOM)
+Camera::Camera(glm::vec3 position, glm::vec3 up, float yaw, float pitch)
+	:Front(glm::vec3(0.0f, 0.0f, -1.0f)), MovementSpeed(SPEED), MouseSensitivity(SENSITIVITY), Zoom(ZOOM),IsBind(false)
 {
 	Position = position;
 	WorldUp = up;
@@ -8,7 +9,8 @@ Camera::Camera(glm::vec3 position, glm::vec3 up, float yaw, float pitch) :Front(
 	Pitch = pitch;
 	updateCameraVectors();
 }
-Camera::Camera(float posX, float posY, float posZ, float upX, float upY, float upZ,float yaw = YAW, float pitch = PITCH) :Front(glm::vec3(0.0f, 0.0f, -1.0f)), MovementSpeed(SPEED), MouseSensitivity(SENSITIVITY), Zoom(ZOOM)
+Camera::Camera(float posX, float posY, float posZ, float upX, float upY, float upZ,float yaw = YAW, float pitch = PITCH) 
+	:Front(glm::vec3(0.0f, 0.0f, -1.0f)), MovementSpeed(SPEED), MouseSensitivity(SENSITIVITY), Zoom(ZOOM),IsBind(false)
 {
 	Position = glm::vec3(posX, posY, posZ);
 	WorldUp = glm::vec3(upX,upY,upZ);
@@ -71,8 +73,16 @@ glm::vec3 Camera::getPosition()
 	return Position;
 }
 
-void Camera::Bind(GameObject & gameObject)
+void Camera::Bind(GameObject * object)
 {
+	this->object = object;
+	this->IsBind = true;
+}
+
+void Camera::UnBind()
+{
+	this->object = NULL;
+	this->IsBind = false;
 }
 
 void Camera::updateCameraVectors()
