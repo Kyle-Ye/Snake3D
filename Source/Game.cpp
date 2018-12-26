@@ -9,6 +9,7 @@
 
 // Game-related State data
 SpriteRenderer2D  *Renderer;
+Snake *snake;
 extern Camera camera;
 extern Timer gameTime;
 
@@ -39,9 +40,9 @@ void Game::Init(Scene *scene)
 
 	// Set Objects
 	new GameObject(this->scene, &ResourceManager::GetModel("nanosuit"), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.1f));
-	Snake *snake = new Snake(this->scene, &ResourceManager::GetModel("ball"), glm::vec3(2.0f, 0.0f, 0.0f), glm::vec3(1.0f),5);
+	snake = new Snake(this->scene, &ResourceManager::GetModel("ball"), camera.getPosition, glm::vec3(1.0f),5);
 	// Bind camera
-	camera.Bind(snake);
+	snake->BindCamera(&camera);
 
 	// Load levels
 	/*GameLevel one; one.Load("levels/one.lvl", this->Width, this->Height * 0.5);

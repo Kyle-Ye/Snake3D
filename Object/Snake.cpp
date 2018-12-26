@@ -37,11 +37,16 @@ void Snake::Decrease()
 	else; // todo ËÀÍö·ÖÖ§
 }
 
+void Snake::BindCamera(Camera * camera)
+{
+	this->camera = camera;
+}
+
 void Snake::draw()
 {
 	SnakeNode *index;
 	index = head;
-	for (int i = 0; i < length - 1; i++)
+	for (int i = 1; i < length; i++)
 	{
 		index->draw();
 		index = index->next;
@@ -64,5 +69,12 @@ void Snake::InitSnake()
 
 void Snake::Update()
 {
-
+	SnakeNode *index;
+	index = tail;
+	for (int i = 1; i < length; i++)
+	{
+		index->position = index->prev->position;
+		index = index->prev;
+	}
+	head->position = camera->getPosition;
 }

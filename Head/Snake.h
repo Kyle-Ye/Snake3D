@@ -13,6 +13,7 @@ public:
 	int GetLength();
 	void Incress();
 	void Decrease();
+	void BindCamera(Camera *camera);
 
 	void draw() override;
 private:

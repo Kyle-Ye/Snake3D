@@ -16,9 +16,11 @@
 const unsigned int SCR_WIDTH = 960;//1920
 const unsigned int SCR_HEIGHT = 540;//1080
 
+glm::vec3 birthplace(0.0f,0.0f,3.0f);
+
 Game SnakeGame(SCR_WIDTH, SCR_HEIGHT);
-Camera camera = (glm::vec3(0.0f, 0.0f, 3.0f));
-Timer gameTime(0.0,1.0);
+Camera camera = birthplace;
+Timer gameTime(0.0, 1.0);
 
 int cursor_flag = 1;
 
@@ -31,7 +33,8 @@ void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 void cursor_enter_callback(GLFWwindow* window, int entered);
 void mouse_callback(GLFWwindow* window, double xpos, double ypos);
 void scroll_callback(GLFWwindow* window, double xoffset, double yoffset);
-void processInput(GLFWwindow *window);
+void processInput_GAMESTART(GLFWwindow *window);
+void processInput_GAMEACTIVE(GLFWwindow *window);
 
 MainWindow::MainWindow()
 {
@@ -83,7 +86,7 @@ void MainWindow::MainLoop()
 	SnakeGame.ViewInit();
 	while (SnakeGame.State == GAME_START)
 	{
-		processInput(window);
+		processInput_GAMESTART(window);
 		if (glfwWindowShouldClose(window))
 			break;
 
@@ -101,7 +104,7 @@ void MainWindow::MainLoop()
 	while (!glfwWindowShouldClose(window))
 	{
 		gameTime.Update();
-		processInput(window);
+		processInput_GAMEACTIVE(window);
 
 		glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -160,7 +163,7 @@ void scroll_callback(GLFWwindow * window, double xoffset, double yoffset)
 {
 	camera.ProcessMouseScroll(yoffset);
 }
-void processInput(GLFWwindow *window)
+void processInput_GAMESTART(GLFWwindow *window)
 {
 	//注意速度问题 乘以deltaTime
 	//demo：
@@ -182,51 +185,37 @@ void processInput(GLFWwindow *window)
 
 	if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
 		glfwSetWindowShouldClose(window, true);
-	if (SnakeGame.State == GAME_START)
+	if (glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS)
 	{
-		if (glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS)
+		switch (SnakeGame.BeginFlag)
 		{
-			switch (SnakeGame.BeginFlag)
-			{
-			case 1:
-				SnakeGame.State = GAME_ACTIVE;
-				ResourceManager::Clear();
-				break;
-			case 2:
-				//游戏说明
-				break;
-			case 3:
-				glfwSetWindowShouldClose(window, true);
-				break;
-			default:
-				break;
-			}
-		}
-		if (glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS)
-		{
-			if (SnakeGame.BeginFlag < SnakeGame.BeginItemNumber)
-				SnakeGame.BeginFlag++;
-			else SnakeGame.BeginFlag = 1;
-			Sleep(100);
-		}
-		if (glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS)
-		{
-			if (SnakeGame.BeginFlag >= 1)
-				SnakeGame.BeginFlag--;
-			else SnakeGame.BeginFlag = SnakeGame.BeginItemNumber;
-			Sleep(100);
+		case 1:
+			SnakeGame.State = GAME_ACTIVE;
+			ResourceManager::Clear();
+			break;
+		case 2:
+			//游戏说明
+			break;
+		case 3:
+			glfwSetWindowShouldClose(window, true);
+			break;
+		default:
+			break;
 		}
 	}
-	if (SnakeGame.State == GAME_ACTIVE)
+	if (glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS || glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
 	{
-		if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
-			camera.ProcessKeyboard(FORWARD, gameTime.DeltaTime);
-		if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
-			camera.ProcessKeyboard(BACKWARD, gameTime.DeltaTime);
-		if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
-			camera.ProcessKeyboard(LEFT, gameTime.DeltaTime);
-		if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
-			camera.ProcessKeyboard(RIGHT, gameTime.DeltaTime);
+		if (SnakeGame.BeginFlag < SnakeGame.BeginItemNumber)
+			SnakeGame.BeginFlag++;
+		else SnakeGame.BeginFlag = 1;
+		Sleep(100);
+	}
+	if (glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS || glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
+	{
+		if (SnakeGame.BeginFlag >= 1)
+			SnakeGame.BeginFlag--;
+		else SnakeGame.BeginFlag = SnakeGame.BeginItemNumber;
+		Sleep(100);
 	}
 	if (glfwGetKey(window, GLFW_KEY_GRAVE_ACCENT) == GLFW_PRESS)
 	{
@@ -238,6 +227,21 @@ void processInput(GLFWwindow *window)
 			glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 	}
 	if (glfwGetKey(window, GLFW_KEY_P) == GLFW_PRESS)
-		glPolygonMode(GL_FRONT, GL_LINE);
-
+		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+}
+void processInput_GAMEACTIVE(GLFWwindow *window)
+{
+	if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
+		glfwSetWindowShouldClose(window, true);
+	if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
+		
+		camera.ProcessKeyboard(FORWARD, gameTime.DeltaTime);
+	if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
+		camera.ProcessKeyboard(BACKWARD, gameTime.DeltaTime);
+	if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
+		camera.ProcessKeyboard(LEFT, gameTime.DeltaTime);
+	if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
+		camera.ProcessKeyboard(RIGHT, gameTime.DeltaTime);
+	if (glfwGetKey(window, GLFW_KEY_P) == GLFW_PRESS)
+		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 }
