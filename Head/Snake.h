@@ -12,10 +12,9 @@ public:
 
 	int GetLength();
 	void Incress();
-	void Decress();
-	void OnEatFood();
+	void Decrease();
 
-	void draw();
+	void draw() override;
 private:
 	void InitSnake();
 	void Update();

@@ -39,7 +39,7 @@ void Game::Init(Scene *scene)
 
 	// Set Objects
 	new GameObject(this->scene, &ResourceManager::GetModel("nanosuit"), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.1f));
-	Snake *snake = new Snake(this->scene, &ResourceManager::GetModel("ball"), glm::vec3(2.0f, 0.0f, 0.0f), glm::vec3(0.8f),5);
+	Snake *snake = new Snake(this->scene, &ResourceManager::GetModel("ball"), glm::vec3(2.0f, 0.0f, 0.0f), glm::vec3(1.0f),5);
 	// Bind camera
 	camera.Bind(snake);
 

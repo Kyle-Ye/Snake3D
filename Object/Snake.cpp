@@ -17,14 +17,24 @@ int Snake::GetLength()
 
 void Snake::Incress()
 {
+	length++;
+	SnakeNode *index;
+	index = tail;
+	tail = new SnakeNode(scene, model, glm::vec3(tail->position.x+2.0, tail->position.y, tail->position.z), size, index, nullptr);
+	index->next = tail;
 }
 
-void Snake::Decress()
+void Snake::Decrease()
 {
-}
-
-void Snake::OnEatFood()
-{
+	length--;
+	if (tail->prev != nullptr)
+	{
+		SnakeNode *index;
+		index = tail->prev;
+		delete tail;
+		tail = index;
+	}
+	else; // todo ËÀÍö·ÖÖ§
 }
 
 void Snake::draw()
@@ -47,11 +57,12 @@ void Snake::InitSnake()
 	for (int i = 1; i < length; i++)
 	{
 		index = tail;
-		tail = new SnakeNode(scene, model,glm::vec3(position.x,position.y+1.0*i,position.z), size,index, nullptr);
+		tail = new SnakeNode(scene, model,glm::vec3(position.x+2.0 * i,position.y,position.z), size,index, nullptr);
 		index->next = tail;
 	}
 }
 
 void Snake::Update()
 {
+
 }
