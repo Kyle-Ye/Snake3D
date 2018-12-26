@@ -130,6 +130,8 @@
     <ClCompile Include="Object\Scene.cpp" />
     <ClCompile Include="Object\Snake.cpp" />
     <ClCompile Include="Object\SnakeNode.cpp" />
+    <ClCompile Include="Util\SkyBox.cpp" />
+    <ClCompile Include="Util\Random.cpp" />
     <ClCompile Include="Source\Game.cpp" />
     <ClCompile Include="Source\MainWindow.cpp" />
     <ClCompile Include="Object\SpritRenderer2D.cpp" />
@@ -149,6 +151,8 @@
     <None Include="shaders\ball.vs" />
     <None Include="shaders\nanosuit.fs" />
     <None Include="shaders\nanosuit.vs" />
+    <None Include="shaders\skybox.fs" />
+    <None Include="shaders\skybox.vs" />
     <None Include="shaders\sprite.fs" />
     <None Include="shaders\sprite.vs" />
   </ItemGroup>
@@ -174,6 +178,8 @@
     <ClInclude Include="Head\Timer.h" />
     <ClInclude Include="Head\Scene.h" />
     <ClInclude Include="Head\SnakeNode.h" />
+    <ClInclude Include="Head\Random.h" />
+    <ClInclude Include="Head\SkyBox.h" />
   </ItemGroup>
   <ItemGroup>
     <Library Include="lib\glfw3.lib" />
@@ -182,6 +188,12 @@
     <Image Include="Resource\awesomeface.png" />
     <Image Include="Resource\container.jpg" />
     <Image Include="Resource\image_black.jpg" />
+    <Image Include="skybox\back.jpg" />
+    <Image Include="skybox\bottom.jpg" />
+    <Image Include="skybox\front.jpg" />
+    <Image Include="skybox\left.jpg" />
+    <Image Include="skybox\right.jpg" />
+    <Image Include="skybox\top.jpg" />
     <Image Include="textures\awesomeface.png" />
     <Image Include="textures\background.jpg" />
     <Image Include="textures\begin_view.jpg" />

@@ -37,21 +37,16 @@ void Snake::Decrease()
 	else; // todo ËÀÍö·ÖÖ§
 }
 
-void Snake::BindCamera(Camera * camera)
-{
-	this->camera = camera;
-}
-
-void Snake::draw()
+void Snake::Draw()
 {
 	SnakeNode *index;
 	index = head;
 	for (int i = 1; i < length; i++)
 	{
-		index->draw();
+		index->Draw();
 		index = index->next;
 	}
-	index->draw();
+	index->Draw();
 }
 
 void Snake::InitSnake()
@@ -73,8 +68,18 @@ void Snake::Update()
 	index = tail;
 	for (int i = 1; i < length; i++)
 	{
-		index->position = index->prev->position;
+		glm::vec3 delta = index->prev->position - index->position;
+		index->position += delta * speed;
 		index = index->prev;
 	}
-	head->position = camera->getPosition;
+	head->position = position;
+	head->Update();
+
+	for (int i = 1; i < length; i++)
+	{
+		index = index->next;
+		glm::vec3 delta = glm::normalize(index->position - index->prev->position) *2.0f;
+		index->position = index->prev->position + delta;
+		index->Update();
+	}
 }

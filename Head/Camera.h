@@ -3,7 +3,7 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <vector>
-#include "GameObject.h"
+#include "Snake.h"
 enum Camera_Movement {
 	FORWARD,
 	BACKWARD,
@@ -25,7 +25,7 @@ public:
 	float MovementSpeed;
 	float MouseSensitivity;
 	float Zoom;
-	GameObject *object;
+	Snake *object;
 	bool IsBind;
 
 	Camera(glm::vec3 position = glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3 up = glm::vec3(0.0f, 1.0f, 0.0f), float yaw = YAW, float pitch = PITCH);
@@ -35,7 +35,7 @@ public:
 	void ProcessMouseMovement(float xoffset, float yoffset, GLboolean constrainPitch = true);
 	void ProcessMouseScroll(float yoffset);
 	glm::vec3 getPosition();
-	void Bind(GameObject *object);
+	void Bind(Snake *object);
 	void UnBind();
 private:
 	glm::vec3 Position;

@@ -106,7 +106,7 @@ void MainWindow::MainLoop()
 		gameTime.Update();
 		processInput_GAMEACTIVE(window);
 
-		glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
+		glClearColor(1.0f, 1.0f, 0.0f, 0.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 		SnakeGame.FrameCycle();
@@ -233,15 +233,14 @@ void processInput_GAMEACTIVE(GLFWwindow *window)
 {
 	if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
 		glfwSetWindowShouldClose(window, true);
-	if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
-		
-		camera.ProcessKeyboard(FORWARD, gameTime.DeltaTime);
-	if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
-		camera.ProcessKeyboard(BACKWARD, gameTime.DeltaTime);
-	if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
-		camera.ProcessKeyboard(LEFT, gameTime.DeltaTime);
-	if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
-		camera.ProcessKeyboard(RIGHT, gameTime.DeltaTime);
 	if (glfwGetKey(window, GLFW_KEY_P) == GLFW_PRESS)
 		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+	if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
+		camera.ProcessKeyboard(BACKWARD, gameTime.DeltaTime);
+	else if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
+		camera.ProcessKeyboard(LEFT, gameTime.DeltaTime);
+	else if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
+		camera.ProcessKeyboard(RIGHT, gameTime.DeltaTime);
+	else camera.ProcessKeyboard(FORWARD, gameTime.DeltaTime);
+	
 }

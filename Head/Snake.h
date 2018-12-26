@@ -1,7 +1,6 @@
 #pragma once
 #include "GameObject.h"
 #include "SnakeNode.h"
-#include "Camera.h"
 
 class Snake :
 	public GameObject
@@ -13,21 +12,18 @@ public:
 	int GetLength();
 	void Incress();
 	void Decrease();
-	void BindCamera(Camera *camera);
 
-	void draw() override;
+	void Draw() override;
 private:
 	void InitSnake();
-	void Update();
+	void Update() override;
 
 private:
 	Scene* scene;           // to use in InitSnake()
-	Camera* camera;			//Camera will follow snake head
 	SnakeNode* head;
 	SnakeNode* tail;
 	int length;
-	float speed = 10.0f;			//Move speed of the snake
-	float sensitivity = 70.0f;		//The speed of changing view
+	float speed = 0.3f;			//Move speed of the snake
 
 	const float spacing = 2.0f;
 	const glm::vec3 headColor = glm::vec3(1, 0, 0);

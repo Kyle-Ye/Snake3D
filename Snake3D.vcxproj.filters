@@ -66,6 +66,12 @@
     <ClCompile Include="Object\SnakeNode.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="Util\Random.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Util\SkyBox.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include=".gitignore" />
@@ -76,6 +82,8 @@
     <None Include="shaders\ball.vs" />
     <None Include="shaders\nanosuit.fs" />
     <None Include="shaders\nanosuit.vs" />
+    <None Include="shaders\skybox.fs" />
+    <None Include="shaders\skybox.vs" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Head\Shader.h">
@@ -141,6 +149,12 @@
     <ClInclude Include="Head\SnakeNode.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="Head\Random.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Head\SkyBox.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Library Include="lib\glfw3.lib" />
@@ -174,6 +188,24 @@
       <Filter>资源文件</Filter>
     </Image>
     <Image Include="textures\paddle.png">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="skybox\back.jpg">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="skybox\bottom.jpg">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="skybox\front.jpg">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="skybox\left.jpg">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="skybox\right.jpg">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="skybox\top.jpg">
       <Filter>资源文件</Filter>
     </Image>
   </ItemGroup>

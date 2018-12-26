@@ -6,6 +6,7 @@
 #include "../Head/SpriteRenderer2D.h"
 #include "../Head/GameObject.h"
 #include "../Head/Snake.h"
+#include "../Head/SkyBox.h"
 
 // Game-related State data
 SpriteRenderer2D  *Renderer;
@@ -40,11 +41,12 @@ void Game::Init(Scene *scene)
 
 	// Set Objects
 	new GameObject(this->scene, &ResourceManager::GetModel("nanosuit"), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.1f));
-	snake = new Snake(this->scene, &ResourceManager::GetModel("ball"), camera.getPosition, glm::vec3(1.0f),5);
+	snake = new Snake(this->scene, &ResourceManager::GetModel("ball"),camera.getPosition(), glm::vec3(1.0f),5);
 	// Bind camera
-	snake->BindCamera(&camera);
+	camera.Bind(snake);
 
-	// Load levels
+	this->scene->skybox = new Skybox("skybox");
+	// Load levelss
 	/*GameLevel one; one.Load("levels/one.lvl", this->Width, this->Height * 0.5);
 	GameLevel two; two.Load("levels/two.lvl", this->Width, this->Height * 0.5);
 	GameLevel three; three.Load("levels/three.lvl", this->Width, this->Height * 0.5);

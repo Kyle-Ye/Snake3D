@@ -17,7 +17,8 @@ public:
 	
 	GameObject(Scene *scene,Model *model,glm::vec3 pos, glm::vec3 size);
 	virtual ~GameObject() = default;
-	virtual void draw();
-	void update(glm::vec3 position);
-	void update(glm::vec3 position,glm::vec3 size);
+	virtual void Draw();
+	virtual void Update();
+	virtual void Update(glm::vec3 position);
+	virtual void Update(glm::vec3 position,glm::vec3 size);
 };

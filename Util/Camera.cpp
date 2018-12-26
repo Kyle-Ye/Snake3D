@@ -33,8 +33,11 @@ void Camera::ProcessKeyboard(Camera_Movement direction,float deltaTime)
 		Position -= Right * velocity;
 	if (direction == RIGHT)
 		Position += Right * velocity;
-	// make sure you are on the ground
-	//Position.y = 0.0f;
+	// ¼Ó¸©ÊÓ30¶È
+	if (IsBind)
+	{
+		this->object->position = Position + 30.0f * Front - 2.0f * Up;
+	}
 }
 void Camera::ProcessMouseMovement(float xoffset, float yoffset, GLboolean constrainPitch)
 {
@@ -55,6 +58,10 @@ void Camera::ProcessMouseMovement(float xoffset, float yoffset, GLboolean constr
 
 	// Update Front, Right and Up Vectors using the updated Euler angles
 	updateCameraVectors();
+	if (IsBind)
+	{
+		this->object->position = Position + 30.0f * Front - 16.0f * Up;
+	}
 }
 
 // Processes input received from a mouse scroll-wheel event. Only requires input on the vertical wheel-axis
@@ -73,7 +80,7 @@ glm::vec3 Camera::getPosition()
 	return Position;
 }
 
-void Camera::Bind(GameObject * object)
+void Camera::Bind(Snake * object)
 {
 	this->object = object;
 	this->IsBind = true;
@@ -95,4 +102,5 @@ void Camera::updateCameraVectors()
 
 	Right = glm::normalize(glm::cross(Front, WorldUp));  // Normalize the vectors, because their length gets closer to 0 the more you look up or down which results in slower movement.
 	Up = glm::normalize(glm::cross(Right, Front));
+
 }
