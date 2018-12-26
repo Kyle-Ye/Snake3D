@@ -1,22 +1,20 @@
 #pragma once
 #include <glad/glad.h>
 #include <glm/glm.hpp>
-
 #include "Texture2D.h"
 #include "SpriteRenderer2D.h"
 #include "Model.h"
-#include "Scene.h"
+
+class Scene;
 
 class GameObject
 {
 public:
 	// Object state
-	Scene *scene;
 	Model *model;
 	glm::vec3   position, size;
 	glm::mat4   modelMat;
 	
-	GameObject() = default;
 	GameObject(Scene *scene,Model *model,glm::vec3 pos, glm::vec3 size);
 	virtual ~GameObject() = default;
 	void draw();

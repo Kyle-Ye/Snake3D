@@ -22,8 +22,10 @@ Game::~Game()
 	delete Renderer;
 }
 
-void Game::Init()
+void Game::Init(Scene *scene)
 {
+	
+	this->scene = scene;
 	// Load shaders
 	ResourceManager::LoadShader("shaders/nanosuit.vs", "shaders/nanosuit.fs", nullptr, "nanosuit");
 	ResourceManager::LoadShader("shaders/ball.vs", "shaders/ball.fs", nullptr, "ball");
@@ -35,18 +37,11 @@ void Game::Init()
 	// Load Textures
 
 	// Set Objects
-	GameObject(scene,ResourceManager::GetModel("nanosuit"),glm::vec3(0.0f,0.0f,0.0f), glm::vec3(0.1f)), "nanosuit");
-	GameObject(scene,ResourceManager::GetModel("ball"), glm::vec3(2.0f, 0.0f, 0.0f), glm::vec3(0.8f)), "ball1");
-	GameObject(scene,ResourceManager::GetModel("ball"), glm::vec3(-2.0f, 0.0f, 0.0f), glm::vec3(0.8f)), "ball2");
-	LoadGameObject(Ball(ResourceManager::GetModel("ball"), glm::vec3(-2.0f, 0.0f, 0.0f), glm::vec3(0.8f)), "ball2");
-
-	//ResourceManager::camera.Bind(ResourceManager::GetGameObject("test"));
+	GameObject *boss = new GameObject(this->scene, &ResourceManager::GetModel("nanosuit"), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.1f));
+	new GameObject(this->scene,&ResourceManager::GetModel("ball"), glm::vec3(2.0f, 0.0f, 0.0f), glm::vec3(0.8f));
 	// Bind camera
-	camera.bind
+	camera.Bind(boss);
 
-	// Configure shaders
-	//ResourceManager::InitShaderPara(Width,Height);
-	//ResourceManager::GetShader("ball").Use().SetInteger("ball_image", 0);
 	// Load levels
 	/*GameLevel one; one.Load("levels/one.lvl", this->Width, this->Height * 0.5);
 	GameLevel two; two.Load("levels/two.lvl", this->Width, this->Height * 0.5);
@@ -60,22 +55,11 @@ void Game::Init()
 	// Configure game objects
 }
 
-void Game::Update()
+void Game::FrameCycle()
 {
-	ResourceManager::Update();
+	this->scene->Update();
+	this->scene->Render();
 }
-
-void Game::Render()
-{
-	if (this->State == GAME_ACTIVE)
-	{
-		//drawÌì¿ÕºĞ
-		//drawµØÍ¼
-		// draw the snake
-		ResourceManager::Render();
-	}
-}
-
 
 void Game::ViewInit()
 {

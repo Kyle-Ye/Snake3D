@@ -1,19 +1,17 @@
 #include "../Head/Scene.h"
-
-
+#include "../Head/ResourceManager.h"
 
 Scene::Scene():status(normal)
 {
 }
 
-
-Scene::~Scene()
+void Scene::Update()
 {
+	ResourceManager::UpdateShadersCamera();
 }
 void Scene::Render()
 {
 	for (GameObject* object : ObjectList) {
 		object->draw();
 	}
-}
 }

@@ -30,7 +30,7 @@ public:
 
 	static void      Clear();
 	static void      InitShaderPara(GLuint width,GLuint height);
-	
+	static void      UpdateShadersCamera();
 private:
 	// Private constructor, that is we do not want any actual resource manager objects. Its members and functions should be publicly available (static).
 	ResourceManager() { }

@@ -11,14 +11,10 @@ public:
 	void Incress();
 	void Decress();
 
-	void ActivateCamera();
-	const Ball* GetHead();
-
 	void OnEatFood();
 
 private:
 	void InitSnake();
-	void ChangeHead(SnakeNode* newHead);
 	void Update();
 
 private:
@@ -32,4 +28,4 @@ private:
 	const float spacing = 2.0f;
 	const glm::vec3 headColor = glm::vec3(1, 0, 0);
 	const glm::vec3 bodyColor = glm::vec3(0, 1, 1);
-
+}

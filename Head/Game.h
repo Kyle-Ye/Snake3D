@@ -42,10 +42,7 @@ public:
 	void ViewRender();
 	
 	// Initialize game state (load all shaders/textures/levels)
-	void Init();
+	void Init(Scene *scene);
 	// GameLoop
-	void Update();
-	void Render();
-
-	
+	void FrameCycle();
 };

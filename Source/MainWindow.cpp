@@ -41,6 +41,8 @@ MainWindow::MainWindow(const int width, const int height, const std::string titl
 {
 	this->success = WindowInit(width, height, title);
 }
+
+// 整个Window的初始化
 bool MainWindow::WindowInit(const int width, const int height, const std::string title)
 {
 	glfwInit();
@@ -94,8 +96,8 @@ void MainWindow::MainLoop()
 		glfwSwapBuffers(window);
 		glfwPollEvents();
 	}
-
-	SnakeGame.Init();
+	Scene scene;
+	SnakeGame.Init(&scene);
 	while (!glfwWindowShouldClose(window))
 	{
 		gameTime.Update();
@@ -104,9 +106,7 @@ void MainWindow::MainLoop()
 		glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-
-		SnakeGame.Update();
-		SnakeGame.Render();
+		SnakeGame.FrameCycle();
 
 		glfwSwapBuffers(window);
 		glfwPollEvents();
@@ -154,11 +154,11 @@ void mouse_callback(GLFWwindow * window, double xpos, double ypos)
 	lastX = (float)xpos;
 	lastY = (float)ypos;
 
-	ResourceManager::camera.ProcessMouseMovement(xoffset, yoffset);
+	camera.ProcessMouseMovement(xoffset, yoffset);
 }
 void scroll_callback(GLFWwindow * window, double xoffset, double yoffset)
 {
-	ResourceManager::camera.ProcessMouseScroll(yoffset);
+	camera.ProcessMouseScroll(yoffset);
 }
 void processInput(GLFWwindow *window)
 {
@@ -220,13 +220,13 @@ void processInput(GLFWwindow *window)
 	if (SnakeGame.State == GAME_ACTIVE)
 	{
 		if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
-			ResourceManager::camera.ProcessKeyboard(FORWARD, gameTime.DeltaTime);
+			camera.ProcessKeyboard(FORWARD, gameTime.DeltaTime);
 		if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
-			ResourceManager::camera.ProcessKeyboard(BACKWARD, gameTime.DeltaTime);
+			camera.ProcessKeyboard(BACKWARD, gameTime.DeltaTime);
 		if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
-			ResourceManager::camera.ProcessKeyboard(LEFT, gameTime.DeltaTime);
+			camera.ProcessKeyboard(LEFT, gameTime.DeltaTime);
 		if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
-			ResourceManager::camera.ProcessKeyboard(RIGHT, gameTime.DeltaTime);
+			camera.ProcessKeyboard(RIGHT, gameTime.DeltaTime);
 	}
 	if (glfwGetKey(window, GLFW_KEY_GRAVE_ACCENT) == GLFW_PRESS)
 	{

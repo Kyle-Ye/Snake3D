@@ -54,16 +54,10 @@
     <ClCompile Include="Source\MainWindow.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="Object\Ball.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="Util\Timer.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="Object\Scene.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="Object\Snake.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

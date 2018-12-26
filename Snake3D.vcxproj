@@ -124,12 +124,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Object\Ball.cpp" />
     <ClCompile Include="Object\GameObject.cpp" />
     <ClCompile Include="Object\Mesh.cpp" />
     <ClCompile Include="Object\Model.cpp" />
     <ClCompile Include="Object\Scene.cpp" />
-    <ClCompile Include="Object\Snake.cpp" />
     <ClCompile Include="Source\Game.cpp" />
     <ClCompile Include="Source\MainWindow.cpp" />
     <ClCompile Include="Object\SpritRenderer2D.cpp" />
