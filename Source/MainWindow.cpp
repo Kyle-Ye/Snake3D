@@ -242,5 +242,8 @@ void processInput_GAMEACTIVE(GLFWwindow *window)
 	else if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
 		camera.ProcessKeyboard(RIGHT, gameTime.DeltaTime);
 	else camera.ProcessKeyboard(FORWARD, gameTime.DeltaTime);
-	
+	if (glfwGetKey(window, GLFW_KEY_J) == GLFW_PRESS)
+		SnakeGame.scene->snake->Incress();
+	if (glfwGetKey(window, GLFW_KEY_K) == GLFW_PRESS)
+		SnakeGame.scene->snake->Decrease();
 }

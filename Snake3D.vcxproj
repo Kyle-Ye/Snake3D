@@ -157,7 +157,6 @@
     <None Include="shaders\sprite.vs" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Head\Ball.h" />
     <ClInclude Include="Head\GameLevel.h" />
     <ClInclude Include="Head\Game.h" />
     <ClInclude Include="Head\GameObject.h" />

@@ -18,16 +18,15 @@ Skybox::Skybox(std::string path)
 	//load sky box
 	std::vector<std::string> faces
 	{
-		path + "/right.jpg",
-		path + "/left.jpg",
-		path + "/top.jpg",
-		path + "/bottom.jpg",
-		path + "/front.jpg",
-		path + "/back.jpg"
+		path + "/right.",
+		path + "/left.",
+		path + "/top.",
+		path + "/bottom.",
+		path + "/back.",
+		path + "/front."
 	};
 	cubemapTexture = loadCubeMap(faces);
 }
-
 
 Skybox::~Skybox()
 {
@@ -42,7 +41,7 @@ void Skybox::Draw()
 	glBindTexture(GL_TEXTURE_CUBE_MAP, cubemapTexture);
 	glDrawArrays(GL_TRIANGLES, 0, 36);
 	glBindVertexArray(0);
-	//glDepthMask(GL_TRUE);
+	glDepthMask(GL_TRUE);
 }
 
 GLuint Skybox::loadCubeMap(std::vector<std::string> faces)
@@ -53,9 +52,20 @@ GLuint Skybox::loadCubeMap(std::vector<std::string> faces)
 	glBindTexture(GL_TEXTURE_CUBE_MAP, textureID);
 
 	int width, height, nrChannels;
+
+	std::vector<std::string> formats = { "jpg","tga","png" };
+	std::string format;
+	for (std::string _format : formats) {
+		unsigned char *data = stbi_load((faces[0] + _format).c_str(), &width, &height, &nrChannels, 0);
+		if (data) {
+			format = _format;
+			break;
+		}
+	}
+
 	for (unsigned int i = 0; i < faces.size(); i++)
 	{
-		unsigned char *data = stbi_load(faces[i].c_str(), &width, &height, &nrChannels, 0);
+		unsigned char *data = stbi_load((faces[i] + format).c_str(), &width, &height, &nrChannels, 0);
 		if (data)
 		{
 			glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + i,

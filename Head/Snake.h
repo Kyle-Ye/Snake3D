@@ -1,19 +1,21 @@
 #pragma once
 #include "GameObject.h"
 #include "SnakeNode.h"
+#include "Scene.h"
 
 class Snake :
 	public GameObject
 {
 public:
-	Snake(Scene *scene, Model *model, glm::vec3 pos, glm::vec3 size,int length);
+	Snake(Scene *scene, Model *model, Tag tag,glm::vec3 pos, glm::vec3 size,int length);
 	~Snake();
 
-	int GetLength();
+	int length;
 	void Incress();
 	void Decrease();
 
 	void Draw() override;
+	void Death();
 private:
 	void InitSnake();
 	void Update() override;
@@ -22,7 +24,7 @@ private:
 	Scene* scene;           // to use in InitSnake()
 	SnakeNode* head;
 	SnakeNode* tail;
-	int length;
+	
 	float speed = 0.3f;			//Move speed of the snake
 
 	const float spacing = 2.0f;

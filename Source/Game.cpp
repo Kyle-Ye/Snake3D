@@ -40,12 +40,18 @@ void Game::Init(Scene *scene)
 	// Load Textures
 
 	// Set Objects
-	new GameObject(this->scene, &ResourceManager::GetModel("nanosuit"), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.1f));
-	snake = new Snake(this->scene, &ResourceManager::GetModel("ball"),camera.getPosition(), glm::vec3(1.0f),5);
+	new GameObject(this->scene, &ResourceManager::GetModel("nanosuit"), DEAD,glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(1.0f));
+	new GameObject(this->scene, &ResourceManager::GetModel("ball"), FOOD,glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.5f));
+	new GameObject(this->scene, &ResourceManager::GetModel("ball"), WEED,glm::vec3(0.0f, 2.0f, 0.0f), glm::vec3(0.5f));
+	new GameObject(this->scene, &ResourceManager::GetModel("ball"), MINE,glm::vec3(0.0f, 0.0f, 3.0f), glm::vec3(0.5f));
+
+	snake = new Snake(this->scene, &ResourceManager::GetModel("ball"),SNAKE,camera.getPosition(), glm::vec3(1.0f),5);
+
+	this->scene->snake = snake;
 	// Bind camera
 	camera.Bind(snake);
 
-	this->scene->skybox = new Skybox("skybox");
+	this->scene->skybox = new Skybox ("skybox");
 	// Load levelss
 	/*GameLevel one; one.Load("levels/one.lvl", this->Width, this->Height * 0.5);
 	GameLevel two; two.Load("levels/two.lvl", this->Width, this->Height * 0.5);

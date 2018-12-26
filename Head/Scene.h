@@ -5,15 +5,17 @@
 
 enum GameStatus {
 	normal,
-	pause
+	pause,
+	death
 };
-
+class Snake;
 class Scene
 {
 public:
 	Scene();
 	~Scene();
 	Skybox *skybox;
+	Snake *snake;
 	std::list<GameObject*> ObjectList;
 	GameStatus status;
 	void Update();

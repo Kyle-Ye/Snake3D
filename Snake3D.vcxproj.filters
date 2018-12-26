@@ -134,9 +134,6 @@
     <ClInclude Include="Head\SpriteRenderer2D.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="Head\Ball.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="Head\Timer.h">
       <Filter>头文件</Filter>
     </ClInclude>
