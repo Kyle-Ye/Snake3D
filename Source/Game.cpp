@@ -5,6 +5,7 @@
 #include "../Head/ResourceManager.h"
 #include "../Head/SpriteRenderer2D.h"
 #include "../Head/GameObject.h"
+#include "../Head/Snake.h"
 
 // Game-related State data
 SpriteRenderer2D  *Renderer;
@@ -37,10 +38,10 @@ void Game::Init(Scene *scene)
 	// Load Textures
 
 	// Set Objects
-	GameObject *boss = new GameObject(this->scene, &ResourceManager::GetModel("nanosuit"), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.1f));
-	new GameObject(this->scene,&ResourceManager::GetModel("ball"), glm::vec3(2.0f, 0.0f, 0.0f), glm::vec3(0.8f));
+	new GameObject(this->scene, &ResourceManager::GetModel("nanosuit"), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.1f));
+	Snake *snake = new Snake(this->scene, &ResourceManager::GetModel("ball"), glm::vec3(2.0f, 0.0f, 0.0f), glm::vec3(0.8f),5);
 	// Bind camera
-	camera.Bind(boss);
+	camera.Bind(snake);
 
 	// Load levels
 	/*GameLevel one; one.Load("levels/one.lvl", this->Width, this->Height * 0.5);

@@ -60,6 +60,12 @@
     <ClCompile Include="Object\Scene.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="Object\Snake.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\SnakeNode.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include=".gitignore" />
@@ -130,6 +136,9 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="Head\Snake.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Head\SnakeNode.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

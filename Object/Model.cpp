@@ -24,7 +24,6 @@ void Model::Draw()
 	meshes[i]->Draw(shader);
 }
 
-
 // private functions
 void Model::loadModel(string const &path)
 {

@@ -128,6 +128,8 @@
     <ClCompile Include="Object\Mesh.cpp" />
     <ClCompile Include="Object\Model.cpp" />
     <ClCompile Include="Object\Scene.cpp" />
+    <ClCompile Include="Object\Snake.cpp" />
+    <ClCompile Include="Object\SnakeNode.cpp" />
     <ClCompile Include="Source\Game.cpp" />
     <ClCompile Include="Source\MainWindow.cpp" />
     <ClCompile Include="Object\SpritRenderer2D.cpp" />
@@ -171,6 +173,7 @@
     <ClInclude Include="Head\SpriteRenderer2D.h" />
     <ClInclude Include="Head\Timer.h" />
     <ClInclude Include="Head\Scene.h" />
+    <ClInclude Include="Head\SnakeNode.h" />
   </ItemGroup>
   <ItemGroup>
     <Library Include="lib\glfw3.lib" />
