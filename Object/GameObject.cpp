@@ -2,7 +2,7 @@
 #include "../Head/Scene.h"
 
 GameObject::GameObject(Scene * scene, Model * model, Tag tag,glm::vec3 pos, glm::vec3 size)
-	:model(model),position(pos),size(size)
+	:model(model),position(pos),size(size),tag(tag)
 {
 	glm::mat4 modelMat = glm::mat4(1.0f);
 	modelMat = glm::translate(modelMat, pos);

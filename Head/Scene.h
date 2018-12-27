@@ -6,12 +6,14 @@
 enum GameStatus {
 	normal,
 	pause,
-	death
+	death,
+	win
 };
 class Snake;
 class Scene
 {
 public:
+	int	Score = 0;
 	Scene();
 	~Scene();
 	Skybox *skybox;

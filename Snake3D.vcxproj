@@ -149,12 +149,18 @@
     <None Include="assimp-vc140-mt.dll" />
     <None Include="shaders\ball.fs" />
     <None Include="shaders\ball.vs" />
+    <None Include="shaders\food.fs" />
+    <None Include="shaders\food.vs" />
+    <None Include="shaders\mine.fs" />
+    <None Include="shaders\mine.vs" />
     <None Include="shaders\nanosuit.fs" />
     <None Include="shaders\nanosuit.vs" />
     <None Include="shaders\skybox.fs" />
     <None Include="shaders\skybox.vs" />
     <None Include="shaders\sprite.fs" />
     <None Include="shaders\sprite.vs" />
+    <None Include="shaders\weed.fs" />
+    <None Include="shaders\weed.vs" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Head\GameLevel.h" />

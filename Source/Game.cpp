@@ -7,6 +7,7 @@
 #include "../Head/GameObject.h"
 #include "../Head/Snake.h"
 #include "../Head/SkyBox.h"
+#include "../Head/Random.h"
 
 // Game-related State data
 SpriteRenderer2D  *Renderer;
@@ -32,18 +33,31 @@ void Game::Init(Scene *scene)
 	// Load shaders
 	ResourceManager::LoadShader("shaders/nanosuit.vs", "shaders/nanosuit.fs", nullptr, "nanosuit");
 	ResourceManager::LoadShader("shaders/ball.vs", "shaders/ball.fs", nullptr, "ball");
+	ResourceManager::LoadShader("shaders/food.vs", "shaders/food.fs", nullptr, "food");
+	ResourceManager::LoadShader("shaders/weed.vs", "shaders/weed.fs", nullptr, "weed");
 
 	// Load Models
 	ResourceManager::LoadModel("models/nanosuit/nanosuit.obj", "nanosuit", ResourceManager::GetShader("nanosuit"));
 	ResourceManager::LoadModel("models/ball/Ball.obj","ball",ResourceManager::GetShader("ball"));
+	ResourceManager::LoadModel("models/ball/Ball.obj", "food", ResourceManager::GetShader("food"));
+	ResourceManager::LoadModel("models/ball/Ball.obj", "weed", ResourceManager::GetShader("weed"));
 
 	// Load Textures
 
 	// Set Objects
-	new GameObject(this->scene, &ResourceManager::GetModel("nanosuit"), DEAD,glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(1.0f));
-	new GameObject(this->scene, &ResourceManager::GetModel("ball"), FOOD,glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.5f));
-	new GameObject(this->scene, &ResourceManager::GetModel("ball"), WEED,glm::vec3(0.0f, 2.0f, 0.0f), glm::vec3(0.5f));
-	new GameObject(this->scene, &ResourceManager::GetModel("ball"), MINE,glm::vec3(0.0f, 0.0f, 3.0f), glm::vec3(0.5f));
+
+	// GameObject(this->scene, &ResourceManager::GetModel("nanosuit"), DEAD,glm::vec3(-50.0f, 0.0f, 0.0f), glm::vec3(1.0f));
+	for (int i = 0; i < 40; i++)
+	{
+		new GameObject(this->scene, &ResourceManager::GetModel("food"), FOOD, glm::vec3(Random::Range(-50.0f, 50.0f), Random::Range(-50.0f, 50.0f), Random::Range(-50.0f, 50.0f)), glm::vec3(0.15f));
+		new GameObject(this->scene, &ResourceManager::GetModel("weed"), WEED, glm::vec3(Random::Range(-50.0f, 50.0f), Random::Range(-50.0f, 50.0f), Random::Range(-50.0f, 50.0f)), glm::vec3(0.2f));
+	}
+	for (int i = 10; i < 40; i++)
+	{
+		new GameObject(this->scene, &ResourceManager::GetModel("mine"), FOOD, glm::vec3(Random::Range(-50.0f, 50.0f), Random::Range(-50.0f, 50.0f), Random::Range(-50.0f, 50.0f)), glm::vec3(0.15f));
+	}
+	//new GameObject(this->scene, &ResourceManager::GetModel("food"), FOOD, glm::vec3(random.Range(0.0f, 100.0f), random.Range(0.0f, 100.0f), random.Range(0.0f, 100.0f)), glm::vec3(0.15f));
+	//new GameObject(this->scene, &ResourceManager::GetModel("ball"), MINE,glm::vec3(0.0f, 0.0f, 3.0f), glm::vec3(0.5f));
 
 	snake = new Snake(this->scene, &ResourceManager::GetModel("ball"),SNAKE,camera.getPosition(), glm::vec3(1.0f),5);
 
@@ -67,8 +81,23 @@ void Game::Init(Scene *scene)
 
 void Game::FrameCycle()
 {
-	this->scene->Update();
-	this->scene->Render();
+	switch (scene->status)
+	{
+	case normal:
+	camera.ProcessKeyboard(FORWARD, gameTime.DeltaTime);
+		this->scene->Update();
+		this->scene->Render();
+		break;
+	case pause:
+		break;
+	case death:
+		this->State = GAME_LOSE;
+		break;
+	case win:
+		
+	default:
+		break;
+	}
 }
 
 void Game::ViewInit()
@@ -113,7 +142,9 @@ void Game::ViewRender()
 	if (this->State == GAME_START)
 	{
 		Renderer->DrawSprite(ResourceManager::GetTexture("begin_view"),glm::vec2(0, 0), glm::vec2(this->Width, this->Height), 0.0f);
-		Renderer->DrawSprite(ResourceManager::GetTexture("begin_item"), glm::vec2(360, 70 + 90 * this->BeginFlag), glm::vec2(200,100), 0.0f);
-		Renderer->DrawSprite(ResourceManager::GetTexture("select_item"), glm::vec2(200, 100+ 90 * this->BeginFlag), glm::vec2(100, 35), glm::radians(90.0f));
+		Renderer->DrawSprite(ResourceManager::GetTexture("select_item"), glm::vec2(200, 100 + 90 * this->BeginFlag), glm::vec2(100, 35), glm::radians(90.0f));
+		Renderer->DrawSprite(ResourceManager::GetTexture("begin_item"), glm::vec2(360, 70 + 90 * this->BeginFlag), glm::vec2(200, 100), 0.0f);
+	
+	
 	}
 }

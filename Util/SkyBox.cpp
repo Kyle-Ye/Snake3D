@@ -11,7 +11,7 @@ Skybox::Skybox()
 Skybox::Skybox(std::string path)
 {
 	//load Shader
-	ResourceManager::LoadShader("shaders/ball.vs", "shaders/ball.fs", nullptr, "skybox");
+	ResourceManager::LoadShader("shaders/skybox.vs", "shaders/skybox.fs", nullptr, "skybox");
 	shader = &ResourceManager::GetShader("skybox");
 	//load OpenGL object
 	loadOpenglObject();
@@ -22,8 +22,8 @@ Skybox::Skybox(std::string path)
 		path + "/left.",
 		path + "/top.",
 		path + "/bottom.",
-		path + "/back.",
-		path + "/front."
+		path + "/front.",
+		path + "/back."
 	};
 	cubemapTexture = loadCubeMap(faces);
 }
@@ -33,9 +33,12 @@ Skybox::~Skybox()
 
 }
 
-void Skybox::Draw()
+void Skybox::Draw(glm::mat4 view, glm::mat4 projection)
 {
-	//glDepthMask(GL_FALSE);
+	view = glm::mat4(glm::mat3(view));
+	shader->SetMatrix4("view", view);
+	shader->SetMatrix4("projection", projection);
+	glDepthMask(GL_FALSE);
 	shader->Use();
 	glBindVertexArray(VAO);
 	glBindTexture(GL_TEXTURE_CUBE_MAP, cubemapTexture);

@@ -11,6 +11,7 @@ public:
 	~Snake();
 
 	int length;
+	float speed = 0.3f;
 	void Incress();
 	void Decrease();
 
@@ -24,10 +25,7 @@ private:
 	Scene* scene;           // to use in InitSnake()
 	SnakeNode* head;
 	SnakeNode* tail;
-	
-	float speed = 0.3f;			//Move speed of the snake
 
-	const float spacing = 2.0f;
 	const glm::vec3 headColor = glm::vec3(1, 0, 0);
 	const glm::vec3 bodyColor = glm::vec3(0, 1, 1);
 };

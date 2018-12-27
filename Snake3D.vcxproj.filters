@@ -84,6 +84,12 @@
     <None Include="shaders\nanosuit.vs" />
     <None Include="shaders\skybox.fs" />
     <None Include="shaders\skybox.vs" />
+    <None Include="shaders\food.fs" />
+    <None Include="shaders\food.vs" />
+    <None Include="shaders\weed.fs" />
+    <None Include="shaders\weed.vs" />
+    <None Include="shaders\mine.fs" />
+    <None Include="shaders\mine.vs" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Head\Shader.h">

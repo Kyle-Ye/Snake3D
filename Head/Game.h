@@ -8,8 +8,8 @@
 enum GameState {
 	GAME_START,
 	GAME_ACTIVE,
-	GAME_MENU,
-	GAME_WIN
+	GAME_WIN,
+	GAME_LOSE
 };
 
 
@@ -22,6 +22,7 @@ public:
 	// 游戏全局状态
 	GameState              State;
 	GLuint                 Width, Height;
+	
 	// 初始界面相关变量
 	int 				   BeginFlag;
 	const int              BeginItemNumber = 3;

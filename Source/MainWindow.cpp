@@ -55,7 +55,7 @@ bool MainWindow::WindowInit(const int width, const int height, const std::string
 
 	GLFWmonitor *monitor = glfwGetPrimaryMonitor();
 	const GLFWvidmode * mode = glfwGetVideoMode(monitor);
-	window = glfwCreateWindow(width, height, title.c_str(), NULL, NULL);
+	window = glfwCreateWindow(mode->width,mode->height, title.c_str(), monitor, NULL);
 	if (window == NULL)
 	{
 		std::cout << "Failed to create GLFW window" << std::endl;
@@ -99,6 +99,7 @@ void MainWindow::MainLoop()
 		glfwSwapBuffers(window);
 		glfwPollEvents();
 	}
+
 	Scene scene;
 	SnakeGame.Init(&scene);
 	while (!glfwWindowShouldClose(window))
@@ -165,24 +166,6 @@ void scroll_callback(GLFWwindow * window, double xoffset, double yoffset)
 }
 void processInput_GAMESTART(GLFWwindow *window)
 {
-	//注意速度问题 乘以deltaTime
-	//demo：
-	//	if (this->State == GAME_ACTIVE)
-	//	{
-	//		GLfloat velocity = PLAYER_VELOCITY * dt;
-	//		// Move playerboard
-	//		if (this->Keys[GLFW_KEY_A])
-	//		{
-	//			if (Player->Position.x >= 0)
-	//				Player->Position.x -= velocity;
-	//		}
-	//		if (this->Keys[GLFW_KEY_D])
-	//		{
-	//			if (Player->Position.x <= this->Width - Player->Size.x)
-	//				Player->Position.x += velocity;
-	//		}
-	//	}
-
 	if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
 		glfwSetWindowShouldClose(window, true);
 	if (glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS)
@@ -234,14 +217,23 @@ void processInput_GAMEACTIVE(GLFWwindow *window)
 	if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
 		glfwSetWindowShouldClose(window, true);
 	if (glfwGetKey(window, GLFW_KEY_P) == GLFW_PRESS)
-		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+		SnakeGame.scene->status = pause;
+	if (glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS)
+		SnakeGame.scene->status = normal;
+	if (glfwGetKey(window, GLFW_KEY_F1) == GLFW_PRESS)
+		SnakeGame.scene->snake->speed +=0.1f;
+	if (glfwGetKey(window, GLFW_KEY_F2) == GLFW_PRESS)
+		SnakeGame.scene->snake->speed -= 0.1f;
+	if (glfwGetKey(window, GLFW_KEY_F3) == GLFW_PRESS)
+		camera.MovementSpeed += 0.1f;
+	if (glfwGetKey(window, GLFW_KEY_F4) == GLFW_PRESS)
+		camera.MovementSpeed -= 0.1f;
 	if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
 		camera.ProcessKeyboard(BACKWARD, gameTime.DeltaTime);
 	else if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
 		camera.ProcessKeyboard(LEFT, gameTime.DeltaTime);
 	else if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
 		camera.ProcessKeyboard(RIGHT, gameTime.DeltaTime);
-	else camera.ProcessKeyboard(FORWARD, gameTime.DeltaTime);
 	if (glfwGetKey(window, GLFW_KEY_J) == GLFW_PRESS)
 		SnakeGame.scene->snake->Incress();
 	if (glfwGetKey(window, GLFW_KEY_K) == GLFW_PRESS)

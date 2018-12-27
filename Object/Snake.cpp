@@ -28,8 +28,9 @@ void Snake::Decrease()
 		index = tail->prev;
 		delete tail;
 		tail = index;
+		this->scene->ObjectList.pop_back();
 	}
-	else; // todo 死亡分支
+	else Death(); // todo 死亡分支
 }
 
 void Snake::Draw()
