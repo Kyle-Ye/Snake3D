@@ -37,7 +37,6 @@ void Scene::Update()
 			//case BODY:
 			case DEAD:
 				snake->Death();
-				std::cout << "Die" << std::endl;
 				break;
 			case FOOD:
 				snake->Incress();
@@ -58,6 +57,7 @@ void Scene::Update()
 					snake->Decrease();
 				}
 				object->position = glm::vec3(Random::Range(-50.0f, 50.0f), Random::Range(-50.0f, 50.0f), Random::Range(-50.0f, 50.0f));
+				this->Score -= 10;
 				break;
 			default:
 				break;

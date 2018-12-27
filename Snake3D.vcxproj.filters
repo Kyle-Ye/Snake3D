@@ -72,6 +72,9 @@
     <ClCompile Include="Util\SkyBox.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="Object\Weed.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include=".gitignore" />
@@ -156,6 +159,9 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="Head\SkyBox.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Head\Weed.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

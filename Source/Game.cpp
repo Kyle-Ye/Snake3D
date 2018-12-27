@@ -8,6 +8,7 @@
 #include "../Head/Snake.h"
 #include "../Head/SkyBox.h"
 #include "../Head/Random.h"
+#include "../Head/Weed.h"
 
 // Game-related State data
 SpriteRenderer2D  *Renderer;
@@ -35,12 +36,15 @@ void Game::Init(Scene *scene)
 	ResourceManager::LoadShader("shaders/ball.vs", "shaders/ball.fs", nullptr, "ball");
 	ResourceManager::LoadShader("shaders/food.vs", "shaders/food.fs", nullptr, "food");
 	ResourceManager::LoadShader("shaders/weed.vs", "shaders/weed.fs", nullptr, "weed");
+	ResourceManager::LoadShader("shaders/mine.vs", "shaders/mine.fs", nullptr, "mine");
 
 	// Load Models
 	ResourceManager::LoadModel("models/nanosuit/nanosuit.obj", "nanosuit", ResourceManager::GetShader("nanosuit"));
 	ResourceManager::LoadModel("models/ball/Ball.obj","ball",ResourceManager::GetShader("ball"));
 	ResourceManager::LoadModel("models/ball/Ball.obj", "food", ResourceManager::GetShader("food"));
 	ResourceManager::LoadModel("models/ball/Ball.obj", "weed", ResourceManager::GetShader("weed"));
+	ResourceManager::LoadModel("models/ball/Ball.obj", "mine", ResourceManager::GetShader("mine"));
+
 
 	// Load Textures
 
@@ -50,14 +54,12 @@ void Game::Init(Scene *scene)
 	for (int i = 0; i < 40; i++)
 	{
 		new GameObject(this->scene, &ResourceManager::GetModel("food"), FOOD, glm::vec3(Random::Range(-50.0f, 50.0f), Random::Range(-50.0f, 50.0f), Random::Range(-50.0f, 50.0f)), glm::vec3(0.15f));
-		new GameObject(this->scene, &ResourceManager::GetModel("weed"), WEED, glm::vec3(Random::Range(-50.0f, 50.0f), Random::Range(-50.0f, 50.0f), Random::Range(-50.0f, 50.0f)), glm::vec3(0.2f));
+		new Weed(this->scene, &ResourceManager::GetModel("weed"), WEED, glm::vec3(Random::Range(-50.0f, 50.0f), Random::Range(-50.0f, 50.0f), Random::Range(-50.0f, 50.0f)), glm::vec3(0.2f));
 	}
-	for (int i = 10; i < 40; i++)
+	for (int i = 0; i < 30; i++)
 	{
-		new GameObject(this->scene, &ResourceManager::GetModel("mine"), FOOD, glm::vec3(Random::Range(-50.0f, 50.0f), Random::Range(-50.0f, 50.0f), Random::Range(-50.0f, 50.0f)), glm::vec3(0.15f));
+		new GameObject(this->scene, &ResourceManager::GetModel("mine"), MINE, glm::vec3(Random::Range(-50.0f, 50.0f), Random::Range(-50.0f, 50.0f), Random::Range(-50.0f, 50.0f)), glm::vec3(0.15f));
 	}
-	//new GameObject(this->scene, &ResourceManager::GetModel("food"), FOOD, glm::vec3(random.Range(0.0f, 100.0f), random.Range(0.0f, 100.0f), random.Range(0.0f, 100.0f)), glm::vec3(0.15f));
-	//new GameObject(this->scene, &ResourceManager::GetModel("ball"), MINE,glm::vec3(0.0f, 0.0f, 3.0f), glm::vec3(0.5f));
 
 	snake = new Snake(this->scene, &ResourceManager::GetModel("ball"),SNAKE,camera.getPosition(), glm::vec3(1.0f),5);
 

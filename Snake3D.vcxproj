@@ -143,6 +143,7 @@
     <ClCompile Include="Util\Shader.cpp" />
     <ClCompile Include="include\stb_image.cpp" />
     <ClCompile Include="Source\main.cpp" />
+    <ClCompile Include="Object\Weed.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include=".gitignore" />
@@ -185,6 +186,7 @@
     <ClInclude Include="Head\SnakeNode.h" />
     <ClInclude Include="Head\Random.h" />
     <ClInclude Include="Head\SkyBox.h" />
+    <ClInclude Include="Head\Weed.h" />
   </ItemGroup>
   <ItemGroup>
     <Library Include="lib\glfw3.lib" />
