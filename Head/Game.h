@@ -2,14 +2,15 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 #include <vector>
-
 #include "Scene.h"
-#include "GameLevel.h"
-enum GameState {
+
+enum GameStage {
 	GAME_START,
+	GAME_CHOOSE,
 	GAME_ACTIVE,
 	GAME_WIN,
-	GAME_LOSE
+	GAME_LOSE,
+	GAME_EXIT
 };
 
 
@@ -20,16 +21,14 @@ class Game
 {
 public:
 	// 游戏全局状态
-	GameState              State;
-	GLuint                 Width, Height;
+	GameStage Stage;
+	GLuint Width, Height;
 	
 	// 初始界面相关变量
-	int 				   BeginFlag;
-	const int              BeginItemNumber = 3;
-	
-	// 游戏关卡
-	//std::vector<GameLevel> Levels;
-	//GLuint                 Level;
+	int Flag=1;
+	int Map = 1;
+	int Difficulty = 1;
+	const int BeginItemNumber = 3;
 
 	Scene *scene;
 
@@ -37,13 +36,22 @@ public:
 	Game(GLuint width, GLuint height);
 	~Game();
 	
-	void ViewInit();
-	// GameLoop
-	void ViewUpdate();
-	void ViewRender();
-	
-	// Initialize game state (load all shaders/textures/levels)
-	void Init(Scene *scene);
+	void showUIMenu();
+	void showUIChoose();
+	void showUIWin();
+	void showUILose();
+
+	void InitGame(Scene *scene);
 	// GameLoop
 	void FrameCycle();
+private:
+	bool isInitUI = false;
+	
+	void InitUI();
+	
+	void MenuUpdate();
+	void MenuRender();
+
+	void ChooseUpdate();
+	void ChooseRender();
 };

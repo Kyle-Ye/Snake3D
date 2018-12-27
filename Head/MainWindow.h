@@ -12,6 +12,7 @@ public:
 	MainWindow(const int width, const int height, const std::string title);
 	bool WindowInit(const int width, const int height, const std::string title);
 	void MainLoop();
+	void save();
 	~MainWindow();
 };
 
