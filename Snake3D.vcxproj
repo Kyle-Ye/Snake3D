@@ -158,6 +158,8 @@
     <None Include="shaders\nanosuit.vs" />
     <None Include="shaders\skybox.fs" />
     <None Include="shaders\skybox.vs" />
+    <None Include="shaders\snake.fs" />
+    <None Include="shaders\snake.vs" />
     <None Include="shaders\sprite.fs" />
     <None Include="shaders\sprite.vs" />
     <None Include="shaders\weed.fs" />

@@ -93,6 +93,8 @@
     <None Include="shaders\weed.vs" />
     <None Include="shaders\mine.fs" />
     <None Include="shaders\mine.vs" />
+    <None Include="shaders\snake.fs" />
+    <None Include="shaders\snake.vs" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Head\Shader.h">

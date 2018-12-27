@@ -37,6 +37,7 @@ void Game::Init(Scene *scene)
 	ResourceManager::LoadShader("shaders/food.vs", "shaders/food.fs", nullptr, "food");
 	ResourceManager::LoadShader("shaders/weed.vs", "shaders/weed.fs", nullptr, "weed");
 	ResourceManager::LoadShader("shaders/mine.vs", "shaders/mine.fs", nullptr, "mine");
+	ResourceManager::LoadShader("shaders/snake.vs", "shaders/snake.fs", nullptr, "snake");
 
 	// Load Models
 	ResourceManager::LoadModel("models/nanosuit/nanosuit.obj", "nanosuit", ResourceManager::GetShader("nanosuit"));
@@ -44,13 +45,11 @@ void Game::Init(Scene *scene)
 	ResourceManager::LoadModel("models/ball/Ball.obj", "food", ResourceManager::GetShader("food"));
 	ResourceManager::LoadModel("models/ball/Ball.obj", "weed", ResourceManager::GetShader("weed"));
 	ResourceManager::LoadModel("models/ball/Ball.obj", "mine", ResourceManager::GetShader("mine"));
-
+	ResourceManager::LoadModel("models/ball/Ball.obj", "snake", ResourceManager::GetShader("snake"));
 
 	// Load Textures
 
 	// Set Objects
-
-	// GameObject(this->scene, &ResourceManager::GetModel("nanosuit"), DEAD,glm::vec3(-50.0f, 0.0f, 0.0f), glm::vec3(1.0f));
 	for (int i = 0; i < 40; i++)
 	{
 		new GameObject(this->scene, &ResourceManager::GetModel("food"), FOOD, glm::vec3(Random::Range(-50.0f, 50.0f), Random::Range(-50.0f, 50.0f), Random::Range(-50.0f, 50.0f)), glm::vec3(0.15f));
@@ -61,7 +60,7 @@ void Game::Init(Scene *scene)
 		new GameObject(this->scene, &ResourceManager::GetModel("mine"), MINE, glm::vec3(Random::Range(-50.0f, 50.0f), Random::Range(-50.0f, 50.0f), Random::Range(-50.0f, 50.0f)), glm::vec3(0.15f));
 	}
 
-	snake = new Snake(this->scene, &ResourceManager::GetModel("ball"),SNAKE,camera.getPosition(), glm::vec3(1.0f),5);
+	snake = new Snake(this->scene, &ResourceManager::GetModel("snake"),SNAKE,camera.getPosition(), glm::vec3(1.0f),5);
 
 	this->scene->snake = snake;
 	// Bind camera
