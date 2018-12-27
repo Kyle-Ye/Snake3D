@@ -66,7 +66,7 @@ void Game::Init(Scene *scene)
 	// Bind camera
 	camera.Bind(snake);
 
-	this->scene->skybox = new Skybox ("skybox");
+	this->scene->skybox = new Skybox ("skybox/fire");
 	// Load levelss
 	/*GameLevel one; one.Load("levels/one.lvl", this->Width, this->Height * 0.5);
 	GameLevel two; two.Load("levels/two.lvl", this->Width, this->Height * 0.5);
