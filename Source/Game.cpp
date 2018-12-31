@@ -148,17 +148,6 @@ void Game::InitGame(Scene *scene)
 	default:
 		break;
 	}
-	// Load levelss
-	/*GameLevel one; one.Load("levels/one.lvl", this->Width, this->Height * 0.5);
-	GameLevel two; two.Load("levels/two.lvl", this->Width, this->Height * 0.5);
-	GameLevel three; three.Load("levels/three.lvl", this->Width, this->Height * 0.5);
-	GameLevel four; four.Load("levels/four.lvl", this->Width, this->Height * 0.5);
-	this->Levels.push_back(one);
-	this->Levels.push_back(two);
-	this->Levels.push_back(three);
-	this->Levels.push_back(four);
-	this->Level = 0;*/
-	// Configure game objects
 }
 
 void Game::FrameCycle()
@@ -249,7 +238,7 @@ void Game::ChooseRender()
 {
 	Renderer->DrawSprite(ResourceManager::GetTexture("background2"), glm::vec2(0, 0), glm::vec2(this->Width, this->Height), 0.0f);
 	Renderer->DrawSprite(ResourceManager::GetTexture("maptitle"), glm::vec2(250, 50), glm::vec2(100, 100), 0.0f);
-	Renderer->DrawSprite(ResourceManager::GetTexture("difficultytitle"), glm::vec2(250, 200), glm::vec2(100, 100),0.0f);
+	Renderer->DrawSprite(ResourceManager::GetTexture("difficultytitle"), glm::vec2(250, 200), glm::vec2(100, 100), 0.0f);
 	Renderer->DrawSprite(ResourceManager::GetTexture("mapnumber"), glm::vec2(270, 50), glm::vec2(100, 100), 0.0f);
-	Renderer->DrawSprite(ResourceManager::GetTexture("difficultynumber"), glm::vec2(270,200), glm::vec2(100, 100), 0.0f);
+	Renderer->DrawSprite(ResourceManager::GetTexture("difficultynumber"), glm::vec2(270, 200), glm::vec2(100, 100), 0.0f);
 }
