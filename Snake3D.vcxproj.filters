@@ -95,6 +95,7 @@
     <None Include="shaders\mine.vs" />
     <None Include="shaders\snake.fs" />
     <None Include="shaders\snake.vs" />
+    <None Include="README.md" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Head\Shader.h">

@@ -148,6 +148,7 @@
   <ItemGroup>
     <None Include=".gitignore" />
     <None Include="assimp-vc140-mt.dll" />
+    <None Include="README.md" />
     <None Include="shaders\ball.fs" />
     <None Include="shaders\ball.vs" />
     <None Include="shaders\food.fs" />
